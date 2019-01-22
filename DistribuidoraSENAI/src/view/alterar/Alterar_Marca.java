@@ -117,12 +117,6 @@ public class Alterar_Marca extends javax.swing.JFrame {
                 txNome.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-            if (txEndereco.getText().equals("")) {
-                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-                lbMsg.setForeground(Color.red);
-                txEndereco.setBorder(new LineBorder(Color.red));
-                repaint();
-            }
 
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);

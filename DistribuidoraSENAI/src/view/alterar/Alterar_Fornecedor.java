@@ -191,18 +191,6 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
                 txCnpj.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-            if (txTelefone.getText().equals("")) {
-                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-                lbMsg.setForeground(Color.red);
-                txTelefone.setBorder(new LineBorder(Color.red));
-                repaint();
-            }
-            if (txEmail.getText().equals("")) {
-                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-                lbMsg.setForeground(Color.red);
-                txEmail.setBorder(new LineBorder(Color.red));
-                repaint();
-            }
             if (txInscricao.getText().equals("")) {
                 lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
                 lbMsg.setForeground(Color.red);
