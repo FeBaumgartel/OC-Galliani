@@ -96,13 +96,13 @@ public class FuncionarioDao {
                 ResultSet res2 = pstmt2.executeQuery(sql2);
 
                 while (res2.next()) {
-                    funcionario.setNome(res2.getString("nm_pessoa"));
-                    funcionario.setCpf(res2.getString("nr_cpf"));
-                    funcionario.setRg(res2.getString("nr_rg"));
+                    funcionario.setNome(res2.getString("nome"));
+                    funcionario.setCpf(res2.getString("cpf"));
+                    funcionario.setRg(res2.getString("rg"));
                     funcionario.setNascimento(res2.getDate("nascimento"));
-                    funcionario.setTelefone(res2.getString("nr_cpf"));
-                    funcionario.setCelular(res2.getString("nr_rg"));
-                    funcionario.setEmail(res2.getString("nr_rg"));
+                    funcionario.setTelefone(res2.getString("telefone"));
+                    funcionario.setCelular(res2.getString("celular"));
+                    funcionario.setEmail(res2.getString("email"));
 
                 }
             }
