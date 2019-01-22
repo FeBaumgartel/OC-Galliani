@@ -11,14 +11,22 @@ import java.util.Date;
  *
  * @author TnahLenovoNote01
  */
-public class Funcionario {
+public class Funcionario extends Pessoa {
 
+    private int id_funcionario;
     private Date contratacao;
     private double salario;
     private String cargo;
     private String usuario;
     private String senha;
-    private Pessoa pessoa;
+
+    public int getId_funcionario() {
+        return id_funcionario;
+    }
+
+    public void setId_funcionario(int id_funcionario) {
+        this.id_funcionario = id_funcionario;
+    }
 
     public Date getContratacao() {
         return contratacao;
@@ -58,14 +66,6 @@ public class Funcionario {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
 }

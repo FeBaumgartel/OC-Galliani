@@ -9,14 +9,14 @@ package domain;
  *
  * @author TnahLenovoNote01
  */
-public class Cliente {
-    private Pessoa pessoa;
+public class Cliente extends Pessoa {
+    private int id_cliente;
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public int getId_cliente() {
+        return id_cliente;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 }

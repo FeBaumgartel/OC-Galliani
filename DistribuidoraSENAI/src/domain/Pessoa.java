@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -12,13 +13,23 @@ import java.util.Date;
  * @author TnahLenovoNote01
  */
 public class Pessoa {
+
+    private int id_pessoa;
     private String nome;
     private String cpf;
     private String rg;
-    private Date nascimento;
+    private LocalDate nascimento;
     private String telefone;
     private String celular;
     private String email;
+
+    public int getId_pessoa() {
+        return id_pessoa;
+    }
+
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
+    }
 
     public String getNome() {
         return nome;
@@ -44,11 +55,11 @@ public class Pessoa {
         this.rg = rg;
     }
 
-    public Date getNascimento() {
+    public LocalDate getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(Date nascimento) {
+    public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
     }
 
