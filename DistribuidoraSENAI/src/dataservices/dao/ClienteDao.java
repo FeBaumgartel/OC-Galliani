@@ -37,7 +37,7 @@ public class ClienteDao {
         String sql2 = "INSERT INTO cliente(Pessoa_id_pessoa) VALUES (?)";
 
         //Como possui auto increment necessita destes selects
-        String sql3 = "SELECT MAX(cd_pessoa) FROM pessoa";
+        String sql3 = "SELECT MAX(id_pessoa) FROM pessoa";
 
         try {
 
@@ -48,7 +48,7 @@ public class ClienteDao {
             pstmt1.setString(1, cliente.getNome());
             pstmt1.setString(2, cliente.getCpf());
             pstmt1.setString(3, cliente.getRg());
-            pstmt1.setDate(4, Date.valueOf(cliente.getNascimento()));
+            pstmt1.setDate(4, (java.sql.Date) cliente.getNascimento());
             pstmt1.setString(5, cliente.getTelefone());
             pstmt1.setString(6, cliente.getCelular());
             pstmt1.setString(7, cliente.getEmail());
@@ -56,7 +56,7 @@ public class ClienteDao {
 
             ResultSet res7 = pstmt3.executeQuery(sql3);
             while (res7.next()) {
-                id = res7.getInt("MAX(cd_pessoa)");
+                id = res7.getInt("MAX(id_pessoa)");
             }
             pstmt2.setInt(1, id);
             pstmt2.execute();
@@ -68,7 +68,7 @@ public class ClienteDao {
     }
 
     public Pessoa getById(long id) {
-        String sql = "SELECT * FROM cliente WHERE cd_cliente = " + id;
+        String sql = "SELECT * FROM cliente WHERE id_cliente = " + id;
 
         Cliente cliente = new Cliente();
         Pessoa pessoa = new Pessoa();
@@ -105,13 +105,13 @@ public class ClienteDao {
     }
 
     public List<Cliente> list() {
-        String sql = "SELECT * FROM cliente ORDER BY id_cliente ASC";
+        String sql1 = "SELECT * FROM cliente ORDER BY id_cliente ASC";
 
         List<Cliente> lista = new ArrayList<>();
 
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
-            ResultSet res1 = pstmt1.executeQuery(sql);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
 
             while (res1.next()) {
                 Cliente cliente = new Cliente();
@@ -119,7 +119,7 @@ public class ClienteDao {
                 cliente.setId_cliente(res1.getInt("id_cliente"));
                 int idPess = res1.getInt("Pessoa_id_pessoa");
 
-                String sql2 = "SELECT * FROM TB_pessoa WHERE cd_pessoa = " + idPess;
+                String sql2 = "SELECT * FROM TB_pessoa WHERE id_pessoa = " + idPess;
                 PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
                 ResultSet res2 = pstmt2.executeQuery(sql2);
 
@@ -155,7 +155,7 @@ public class ClienteDao {
                 pstmt1.setString(1, cliente.getNome());
                 pstmt1.setString(2, cliente.getCpf());
                 pstmt1.setString(3, cliente.getRg());
-                pstmt1.setDate(4, Date.valueOf(cliente.getNascimento()));
+                pstmt1.setDate(4, (java.sql.Date) cliente.getNascimento());
                 pstmt1.setString(5, cliente.getTelefone());
                 pstmt1.setString(6, cliente.getCelular());
                 pstmt1.setString(7, cliente.getEmail());

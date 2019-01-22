@@ -5,7 +5,10 @@
  */
 package view;
 
+import domain.Funcionario;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.border.LineBorder;
 
 /**
@@ -65,7 +68,6 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
         lbSalario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         btConfirmar.setText("Confirmar");
         btConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -331,6 +333,24 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+    private Funcionario criarFuncionario() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
+        Date contratacao = sdf.parse(txDataCont.getText());
+        Date nascimento = sdf.parse(txDataNasc.getText());
+        String nome = txNome.getText();
+        double salario = Double.parseDouble(txSalario.getText());
+        String cargo = txCargo.getText();
+        String usuario = txUsuario.getText();
+        String senha = txSenha.getText();
+        String cpf = txCPF.getText();
+        String rg = txRG.getText();
+        String telefone = txTelefone.getText();
+        String celular = txCelular.getText();
+        String email = txEmail.getText();
+
+        return new Funcionario(contratacao, salario, cargo, usuario, senha, nome, cpf, rg, nascimento, telefone, celular, email);
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCancelar;

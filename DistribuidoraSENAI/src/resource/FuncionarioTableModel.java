@@ -94,13 +94,13 @@ public class FuncionarioTableModel extends GenericTableModel<Funcionario> {
         Funcionario funcionario = list.get(linha);
         switch (coluna) {
             case 0:
-                return funcionario.getId();
+                return funcionario.getId_funcionario();
             case 1:
-                return funcionario.getPessoa().getNome();
+                return funcionario.getNome();
             case 2:
                 return funcionario.getSalario();
             case 3:
-                return funcionario.getPessoa().getNascimento();
+                return funcionario.getNascimento();
             case 4:
                 return funcionario.getContratacao();
             case 5:

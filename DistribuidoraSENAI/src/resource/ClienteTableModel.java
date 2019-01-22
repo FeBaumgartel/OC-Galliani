@@ -94,11 +94,11 @@ public class ClienteTableModel extends GenericTableModel<Cliente> {
         Cliente cliente = list.get(linha);
         switch (coluna) {
             case 0:
-                return cliente.getId();
+                return cliente.getId_cliente();
             case 1:
-                return cliente.getPessoa().getNome();
+                return cliente.getNome();
             case 3:
-                return cliente.getPessoa().getNascimento();
+                return cliente.getNascimento();
 
         }
         return null;
