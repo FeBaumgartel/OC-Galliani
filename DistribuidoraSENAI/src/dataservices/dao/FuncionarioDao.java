@@ -21,7 +21,7 @@ import java.util.List;
  * @author felip
  */
 public class FuncionarioDao {
-    
+
     private Conexao conexao;
     private Connection connection;
 
@@ -72,7 +72,7 @@ public class FuncionarioDao {
 
     }
 
-    public Pessoa getById(long id) {
+    public Funcionario getById(long id) {
         String sql = "SELECT * FROM funcionario WHERE id_funcionario = " + id;
 
         Funcionario funcionario = new Funcionario();
@@ -113,6 +113,62 @@ public class FuncionarioDao {
         return funcionario;
     }
 
+    public boolean verifUser(String usuario) {
+        String sql = "SELECT * FROM funcionario WHERE usuario = " + usuario;
+
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet res1 = pstmt1.executeQuery(sql);
+
+            if (res1.getString("usuario") != null) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean verifSenha(String usuario, String senha) {
+        String sql = "SELECT * FROM funcionario WHERE usuario = " + usuario + " AND senha = " + senha;
+
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet res1 = pstmt1.executeQuery(sql);
+
+            if (res1.getString("senha") != null) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+    
+    public String getCargo(String usuario, String senha) {
+        String sql = "SELECT * FROM funcionario WHERE usuario = " + usuario + " AND senha = " + senha;
+        String cargo="";
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet res1 = pstmt1.executeQuery(sql);
+
+            cargo=res1.getString("cargo");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return cargo;
+    }
+
     public List<Funcionario> list() {
         String sql1 = "SELECT * FROM funcionario ORDER BY id_funcionario ASC";
 
@@ -124,7 +180,7 @@ public class FuncionarioDao {
 
             while (res1.next()) {
                 Funcionario funcionario = new Funcionario();
-                
+
                 funcionario.setContratacao(res1.getDate("data_contratacao"));
                 funcionario.setSalario(res1.getDouble("salario"));
                 funcionario.setCargo(res1.getString("cargo"));
@@ -168,7 +224,7 @@ public class FuncionarioDao {
             pstmt2.setString(5, funcionario.getSenha());
             pstmt2.setInt(5, funcionario.getId_funcionario());
             pstmt2.execute();
-            
+
             String sql3 = "SELECT Pessoa_id_pessoa FROM funcionario";
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);

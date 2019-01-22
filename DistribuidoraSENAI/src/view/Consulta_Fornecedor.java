@@ -5,22 +5,22 @@
  */
 package view;
 
-import dataservices.dao.FuncionarioDao;
-import domain.Funcionario;
+import dataservices.dao.FornecedorDao;
+import domain.Fornecedor;
 import java.util.List;
 import javax.swing.table.TableModel;
-import resource.FuncionarioTableModel;
+import resource.FornecedorTableModel;
 
 /**
  *
  * @author TnahLenovoNote01
  */
-public class Consulta_Funcionario extends javax.swing.JFrame {
+public class Consulta_Fornecedor extends javax.swing.JFrame {
 
     /**
-     * Creates new form Consulta_Funcionario
+     * Creates new form Consulta_Fornecedor
      */
-    public Consulta_Funcionario() {
+    public Consulta_Fornecedor() {
         initComponents();
         atualizarTabela();
     }
@@ -109,7 +109,7 @@ public class Consulta_Funcionario extends javax.swing.JFrame {
     }//GEN-LAST:event_txBuscaActionPerformed
 
     private void btCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadActionPerformed
-        new Cadastrar_Funcionario().setVisible(true);
+        new Cadastrar_Fornecedor().setVisible(true);
     }//GEN-LAST:event_btCadActionPerformed
 
     /**
@@ -117,8 +117,8 @@ public class Consulta_Funcionario extends javax.swing.JFrame {
      */
     
     private TableModel carregarTabela() {
-        List<Funcionario> lista = dao.list();
-        ptm = new FuncionarioTableModel(lista);
+        List<Fornecedor> lista = dao.list();
+        ptm = new FornecedorTableModel(lista);
         return ptm;
     }
 
@@ -126,8 +126,8 @@ public class Consulta_Funcionario extends javax.swing.JFrame {
         jTable1.setModel(carregarTabela());
     }
     
-    FuncionarioDao dao;
-    private FuncionarioTableModel ptm;
+    FornecedorDao dao;
+    private FornecedorTableModel ptm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;
     private javax.swing.JButton btExc;

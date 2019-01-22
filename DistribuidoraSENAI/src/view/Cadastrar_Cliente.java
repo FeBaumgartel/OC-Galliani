@@ -5,8 +5,11 @@
  */
 package view;
 
+import domain.Cliente;
 import java.awt.Color;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
@@ -243,6 +246,10 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
                 txEmail.setBorder(new LineBorder(Color.red));
                 repaint();
             }
+
+            lbMsg.setText("Cadastro realizado com sucesso");
+            lbMsg.setForeground(Color.green);
+            repaint();
         } catch (Exception e) {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
@@ -253,6 +260,27 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    private Cliente criarCliente() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
+        String Nome = txNome.getText();
+        String cpf = txCPF.getText();
+        String rg = txRG.getText();
+        Date nascimento = sdf.parse(txDataNasc.getText());
+        String telefone = txTelefone.getText();
+        String celular = txCelular.getText();
+        String email = txEmail.getText();
+
+        return new Cliente(Nome, cpf, rg, nascimento, telefone, celular, email);
+    }
+    private void limpaCampoDetexto() {
+        txNome.setText("");
+        txCPF.setText("");
+        txRG.setText("");
+        txCelular.setText("");
+        txTelefone.setText("");
+        txEmail.setText("");
+        txDataNasc.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCancelar;

@@ -5,7 +5,11 @@
  */
 package view;
 
+import dataservices.dao.ClienteDao;
+import domain.Cliente;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.border.LineBorder;
 
 /**
@@ -199,52 +203,58 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        
+
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        try{
-        if (txNome.getText().equals("")) {
-            lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-            lbMsg.setForeground(Color.red);
-            txNome.setBorder(new LineBorder(Color.red));
+        try {
+            if (txNome.getText().equals("")) {
+                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
+                lbMsg.setForeground(Color.red);
+                txNome.setBorder(new LineBorder(Color.red));
+                repaint();
+            }
+            if (txCPF.getText().equals("")) {
+                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
+                lbMsg.setForeground(Color.red);
+                txCPF.setBorder(new LineBorder(Color.red));
+                repaint();
+            }
+            if (txRG.getText().equals("")) {
+                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
+                lbMsg.setForeground(Color.red);
+                txRG.setBorder(new LineBorder(Color.red));
+                repaint();
+            }
+            if (txDataNasc.getText().equals("")) {
+                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
+                lbMsg.setForeground(Color.red);
+                txDataNasc.setBorder(new LineBorder(Color.red));
+                repaint();
+            }
+            if (txTelefone.getText().equals("")) {
+                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
+                lbMsg.setForeground(Color.red);
+                txTelefone.setBorder(new LineBorder(Color.red));
+                repaint();
+            }
+            if (txEmail.getText().equals("")) {
+                lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
+                lbMsg.setForeground(Color.red);
+                txEmail.setBorder(new LineBorder(Color.red));
+                repaint();
+            }
+
+            dao.update(criarCliente());
+            lbMsg.setText("Alteração realizada com sucesso");
+            lbMsg.setForeground(Color.green);
             repaint();
-        }
-        if (txCPF.getText().equals("")) {
-            lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-            lbMsg.setForeground(Color.red);
-            txCPF.setBorder(new LineBorder(Color.red));
-            repaint();
-        }
-        if (txRG.getText().equals("")) {
-            lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-            lbMsg.setForeground(Color.red);
-            txRG.setBorder(new LineBorder(Color.red));
-            repaint();
-        }
-        if (txDataNasc.getText().equals("")) {
-            lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-            lbMsg.setForeground(Color.red);
-            txDataNasc.setBorder(new LineBorder(Color.red));
-            repaint();
-        }
-        if (txTelefone.getText().equals("")) {
-            lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-            lbMsg.setForeground(Color.red);
-            txTelefone.setBorder(new LineBorder(Color.red));
-            repaint();
-        }
-        if (txEmail.getText().equals("")) {
-            lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
-            lbMsg.setForeground(Color.red);
-            txEmail.setBorder(new LineBorder(Color.red));
-            repaint();
-        }
-        }catch(Exception e){
+        } catch (Exception e) {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
             lbMsg.setForeground(Color.red);
             repaint();
         }
+
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -254,7 +264,30 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    ClienteDao dao;
 
+    private Cliente criarCliente() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
+        String Nome = txNome.getText();
+        String cpf = txCPF.getText();
+        String rg = txRG.getText();
+        Date nascimento = sdf.parse(txDataNasc.getText());
+        String telefone = txTelefone.getText();
+        String celular = txCelular.getText();
+        String email = txEmail.getText();
+
+        return new Cliente(Nome, cpf, rg, nascimento, telefone, celular, email);
+    }
+    
+    private void limpaCampoDetexto() {
+        txNome.setText("");
+        txCPF.setText("");
+        txRG.setText("");
+        txCelular.setText("");
+        txTelefone.setText("");
+        txEmail.setText("");
+        txDataNasc.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCancelar;

@@ -59,13 +59,13 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
         txDataCont = new javax.swing.JTextField();
         lbDataCont = new javax.swing.JLabel();
         lbCargo = new javax.swing.JLabel();
-        txCargo = new javax.swing.JTextField();
         lbUsuario = new javax.swing.JLabel();
         txUsuario = new javax.swing.JTextField();
         lbSenha = new javax.swing.JLabel();
         txSenha = new javax.swing.JTextField();
         txSalario = new javax.swing.JTextField();
         lbSalario = new javax.swing.JLabel();
+        cbCargo = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +124,8 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
 
         lbSalario.setText("Salario");
 
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -144,12 +146,12 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
                             .addComponent(lbEmail, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txDataCont, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(lbCargo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txCargo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(txRG, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbCPF, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbRG, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(txDataNasc))
+                            .addComponent(txDataNasc)
+                            .addComponent(cbCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbImagem)
@@ -200,14 +202,14 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAlterar)
                             .addComponent(btRemover))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(txDataCont, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbCargo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbCPF)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,10 +276,10 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
                 txDataCont.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-            if (txCargo.getText().equals("")) {
+            if (cbCargo.getSelectedItem().equals("")) {
                 lbMsg.setText("Atenção: preencha todos os campos obrigatórios.");
                 lbMsg.setForeground(Color.red);
-                txCargo.setBorder(new LineBorder(Color.red));
+                cbCargo.setBorder(new LineBorder(Color.red));
                 repaint();
             }
             if (txCPF.getText().equals("")) {
@@ -322,6 +324,10 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
                 txSenha.setBorder(new LineBorder(Color.red));
                 repaint();
             }
+
+            lbMsg.setText("Cadastro realizado com sucesso");
+            lbMsg.setForeground(Color.green);
+            repaint();
         } catch (Exception e) {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
@@ -332,14 +338,13 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
     private Funcionario criarFuncionario() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
         Date contratacao = sdf.parse(txDataCont.getText());
         Date nascimento = sdf.parse(txDataNasc.getText());
         String nome = txNome.getText();
         double salario = Double.parseDouble(txSalario.getText());
-        String cargo = txCargo.getText();
+        String cargo = cbCargo.getSelectedItem();
         String usuario = txUsuario.getText();
         String senha = txSenha.getText();
         String cpf = txCPF.getText();
@@ -349,13 +354,28 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
         String email = txEmail.getText();
 
         return new Funcionario(contratacao, salario, cargo, usuario, senha, nome, cpf, rg, nascimento, telefone, celular, email);
-        
+
+    }
+    private void limpaCampoDetexto() {
+        txNome.setText("");
+        txCPF.setText("");
+        txRG.setText("");
+        txCelular.setText("");
+        txTelefone.setText("");
+        txEmail.setText("");
+        txDataNasc.setText("");
+        txDataCont.setText("");
+        txSalario.setText("");
+        cbCargo.setSelectedItem("");
+        txUsuario.setText("");
+        txSenha.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btConfirmar;
     private javax.swing.JButton btRemover;
+    private javax.swing.JComboBox cbCargo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbCPF;
@@ -374,7 +394,6 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
     private javax.swing.JLabel lbTelefone;
     private javax.swing.JLabel lbUsuario;
     private javax.swing.JTextField txCPF;
-    private javax.swing.JTextField txCargo;
     private javax.swing.JTextField txCelular;
     private javax.swing.JTextField txDataCont;
     private javax.swing.JTextField txDataNasc;

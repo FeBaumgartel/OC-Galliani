@@ -5,7 +5,9 @@
  */
 package domain;
 
+import dataservices.dao.FuncionarioDao;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -86,4 +88,26 @@ public class Funcionario extends Pessoa {
 
     public Funcionario() {
     }
+
+    public boolean verificarUser(Funcionario a) {
+        List<Funcionario> lista = dao.list();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (a.getUsuario().equals(lista.get(i).getUsuario())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean verificarSenha(Funcionario a) {
+        List<Funcionario> lista = dao.list();
+
+        for (int i = 0; i < lista.size(); i++) {
+            if (a.getSenha().equals(lista.get(i).getSenha())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    FuncionarioDao dao = new FuncionarioDao();
 }

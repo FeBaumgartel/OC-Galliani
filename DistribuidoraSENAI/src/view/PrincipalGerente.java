@@ -11,13 +11,14 @@ import persist.UserLogado;
  *
  * @author TnahLenovoNote01
  */
-public class Principal extends javax.swing.JFrame {
+public class PrincipalGerente extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public PrincipalGerente() {
         initComponents();
+        btFrente.setEnabled(false);
        // lbUser.setText("Usuário: "+UserLogado.toString);
     }
 
@@ -35,11 +36,11 @@ public class Principal extends javax.swing.JFrame {
         btFrente = new javax.swing.JButton();
         btRelatorios = new javax.swing.JButton();
         btGraficos = new javax.swing.JButton();
+        btEntidades = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         btSair.setText("Sair");
         btSair.addActionListener(new java.awt.event.ActionListener() {
@@ -51,8 +52,25 @@ public class Principal extends javax.swing.JFrame {
         btFrente.setText("Frente de Caixa");
 
         btRelatorios.setText("Relatorios");
+        btRelatorios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRelatoriosActionPerformed(evt);
+            }
+        });
 
         btGraficos.setText("Graficos");
+        btGraficos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGraficosActionPerformed(evt);
+            }
+        });
+
+        btEntidades.setText("Entidades");
+        btEntidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEntidadesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -65,7 +83,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(btRelatorios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btGraficos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btEntidades)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btSair)
                 .addContainerGap())
         );
@@ -77,12 +97,13 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btSair)
                     .addComponent(btFrente)
                     .addComponent(btRelatorios)
-                    .addComponent(btGraficos)))
+                    .addComponent(btGraficos)
+                    .addComponent(btEntidades)))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\TnahLenovoNote01\\Desktop\\imgs\\logo.PNG")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\logo.PNG")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -91,7 +112,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(jLabel4)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,12 +131,25 @@ public class Principal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btSairActionPerformed
 
+    private void btEntidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntidadesActionPerformed
+        new Entidades().setVisible(true);
+    }//GEN-LAST:event_btEntidadesActionPerformed
+
+    private void btRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelatoriosActionPerformed
+        new Relatorios().setVisible(true);
+    }//GEN-LAST:event_btRelatoriosActionPerformed
+
+    private void btGraficosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficosActionPerformed
+        new Graficos().setVisible(true);
+    }//GEN-LAST:event_btGraficosActionPerformed
+
     /**
      * @param args the command line arguments
      */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btEntidades;
     private javax.swing.JButton btFrente;
     private javax.swing.JButton btGraficos;
     private javax.swing.JButton btRelatorios;

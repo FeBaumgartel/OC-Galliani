@@ -5,6 +5,12 @@
  */
 package view;
 
+import dataservices.dao.ClienteDao;
+import domain.Cliente;
+import java.util.List;
+import javax.swing.table.TableModel;
+import resource.ClienteTableModel;
+
 /**
  *
  * @author TnahLenovoNote01
@@ -16,6 +22,7 @@ public class Consulta_Cliente extends javax.swing.JFrame {
      */
     public Consulta_Cliente() {
         initComponents();
+        atualizarTabela();
     }
 
     /**
@@ -44,6 +51,11 @@ public class Consulta_Cliente extends javax.swing.JFrame {
         });
 
         btCad.setText("+");
+        btCad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadActionPerformed(evt);
+            }
+        });
 
         btExc.setText("-");
 
@@ -74,17 +86,6 @@ public class Consulta_Cliente extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -107,11 +108,25 @@ public class Consulta_Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txBuscaActionPerformed
 
+    private void btCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadActionPerformed
+        new Cadastrar_Cliente().setVisible(true);
+    }//GEN-LAST:event_btCadActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    
+    private TableModel carregarTabela() {
+        List<Cliente> lista = dao.list();
+        ptm = new ClienteTableModel(lista);
+        return ptm;
+    }
 
+    private void atualizarTabela() {
+        jTable1.setModel(carregarTabela());
+    }
+    
+    ClienteDao dao;
+    private ClienteTableModel ptm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;
     private javax.swing.JButton btExc;

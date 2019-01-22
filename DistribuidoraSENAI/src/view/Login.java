@@ -5,6 +5,7 @@
  */
 package view;
 
+import dataservices.dao.FuncionarioDao;
 import domain.Funcionario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -108,9 +109,9 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        Funcionario func;
-        String user=txUsuario.getText();
-        String senha=txSenha.getText();
+        FuncionarioDao funcDao = new FuncionarioDao();
+        String user = txUsuario.getText();
+        String senha = txSenha.getText();
         if (user.equals("")) {
             lbMsg.setText("Atenção: Informe seu nome de usuário");
             lbMsg.setForeground(Color.red);
@@ -119,9 +120,25 @@ public class Login extends javax.swing.JFrame {
             lbMsg.setText("Atenção: Informe sua senha");
             lbMsg.setForeground(Color.red);
             repaint();
-        }else if(user.equals(func.getUsuario())){
-            new Principal().setVisible(true);
+        } else if (funcDao.verifUser(user)) {
+            if (funcDao.verifSenha(user, senha)) {
+                if(funcDao.getCargo(user, senha).equals("Gerente")){
+                new PrincipalGerente().setVisible(true);
+                }else if(funcDao.getCargo(user, senha).equals("Gerente de caixa")){
+                    new PrincipalGerenteCaixa().setVisible(true);
+                }else
+                    new PrincipalOperador().setVisible(true);
+            } else {
+                lbMsg.setText("Atenção: Senha incorreta");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            }
+        } else {
+            lbMsg.setText("Atenção: Usuário não existente");
+            lbMsg.setForeground(Color.red);
+            repaint();
         }
+
         new UserLogado(user, senha);
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -175,5 +192,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txSenha;
     private javax.swing.JTextField txUsuario;
     // End of variables declaration//GEN-END:variables
-    
+
 }

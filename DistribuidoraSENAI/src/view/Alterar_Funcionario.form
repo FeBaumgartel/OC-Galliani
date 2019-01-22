@@ -74,11 +74,11 @@
                                       <Component id="lbDataCont" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="txDataCont" max="32767" attributes="0"/>
                                       <Component id="lbCargo" min="-2" max="-2" attributes="0"/>
-                                      <Component id="txCargo" max="32767" attributes="0"/>
                                       <Component id="txRG" alignment="0" max="32767" attributes="0"/>
                                       <Component id="lbCPF" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbRG" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="txCPF" alignment="0" pref="150" max="32767" attributes="0"/>
+                                      <Component id="cbCargo" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -181,7 +181,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lbCargo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txCargo" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbCargo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lbCPF" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -290,8 +290,6 @@
             <Property name="text" type="java.lang.String" value="Cargo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txCargo">
-        </Component>
         <Component class="javax.swing.JLabel" name="lbUsuario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
@@ -311,6 +309,18 @@
         <Component class="javax.swing.JLabel" name="lbSalario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salario"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbCargo">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
