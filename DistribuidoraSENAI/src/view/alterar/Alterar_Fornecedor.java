@@ -10,6 +10,7 @@ import domain.Fornecedor;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 /**
@@ -23,6 +24,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
      */
     public Alterar_Fornecedor() {
         initComponents();
+        limpaCampos();
     }
 
     /**
@@ -212,6 +214,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
             repaint();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
 
@@ -234,7 +237,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
 
     }
 
-    private void limpaCampoDetexto() {
+    private void limpaCampos() {
         txNome.setText("");
         txNomeFantasia.setText("");
         txCnpj.setText("");

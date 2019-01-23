@@ -21,6 +21,15 @@ public class Pessoa {
     private String telefone;
     private String celular;
     private String email;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public int getId_pessoa() {
         return id_pessoa;
@@ -84,5 +93,19 @@ public class Pessoa {
 
     public void setEmail(String email) {
         this.email = email;
-    }    
+    }
+
+    public Pessoa() {
+    }
+
+    public Pessoa(String nome, String cpf, String rg, Date nascimento, String telefone, String celular, String email, String foto) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.nascimento = nascimento;
+        this.telefone = telefone;
+        this.celular = celular;
+        this.email = email;
+        this.foto = foto;
+    }
 }

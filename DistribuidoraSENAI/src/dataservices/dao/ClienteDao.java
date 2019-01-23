@@ -33,7 +33,7 @@ public class ClienteDao {
     public void save(Cliente cliente) {
         int id = 0;
 
-        String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email) VALUES (?,?,?,?,?,?,?)";
+        String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email, foto) VALUES (?,?,?,?,?,?,?,?)";
         String sql2 = "INSERT INTO cliente(Pessoa_id_pessoa) VALUES (?)";
 
         //Como possui auto increment necessita destes selects
@@ -52,6 +52,7 @@ public class ClienteDao {
             pstmt1.setString(5, cliente.getTelefone());
             pstmt1.setString(6, cliente.getCelular());
             pstmt1.setString(7, cliente.getEmail());
+            pstmt1.setString(7, cliente.getFoto());
             pstmt1.execute();
 
             ResultSet res7 = pstmt3.executeQuery(sql3);
@@ -71,7 +72,6 @@ public class ClienteDao {
         String sql = "SELECT * FROM cliente WHERE id_cliente = " + id;
 
         Cliente cliente = new Cliente();
-        Pessoa pessoa = new Pessoa();
 
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
@@ -91,9 +91,10 @@ public class ClienteDao {
                     cliente.setCpf(res2.getString("nr_cpf"));
                     cliente.setRg(res2.getString("nr_rg"));
                     cliente.setNascimento(res2.getDate("nascimento"));
-                    cliente.setTelefone(res2.getString("nr_cpf"));
-                    cliente.setCelular(res2.getString("nr_rg"));
-                    cliente.setEmail(res2.getString("nr_rg"));
+                    cliente.setTelefone(res2.getString("telefone"));
+                    cliente.setCelular(res2.getString("celular"));
+                    cliente.setEmail(res2.getString("email"));
+                    cliente.setFoto(res2.getString("foto"));
 
                 }
             }
@@ -131,6 +132,7 @@ public class ClienteDao {
                     cliente.setTelefone(res2.getString("telefone"));
                     cliente.setCelular(res2.getString("celular"));
                     cliente.setEmail(res2.getString("email"));
+                    cliente.setFoto(res2.getString("foto"));
 
                 }
                 lista.add(cliente);
@@ -142,7 +144,7 @@ public class ClienteDao {
     }
 
     public void update(Cliente cliente) {
-        String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = ? WHERE id_pessoa = ?";
+        String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = ?, foto = ? WHERE id_pessoa = ?";
 
         try {
             String sql2 = "SELECT Pessoa_id_pessoa FROM cliente";
@@ -159,7 +161,8 @@ public class ClienteDao {
                 pstmt1.setString(5, cliente.getTelefone());
                 pstmt1.setString(6, cliente.getCelular());
                 pstmt1.setString(7, cliente.getEmail());
-                pstmt1.setInt(8, id_pessoa);
+                pstmt1.setString(8, cliente.getFoto());
+                pstmt1.setInt(9, id_pessoa);
                 pstmt1.execute();
 
             }

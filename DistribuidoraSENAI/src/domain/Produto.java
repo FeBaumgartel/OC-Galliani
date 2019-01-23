@@ -15,9 +15,18 @@ public class Produto {
     private String cod_barras;
     private double valor_unt;
     private String categoria;
-    private String un_medida;
+    private String foto;
+    private Un_medida un_medida;
     private Marca marca;
     private Fornecedor fornecedor;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -59,11 +68,11 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public String getUn_medida() {
+    public Un_medida getUn_medida() {
         return un_medida;
     }
 
-    public void setUn_medida(String un_medida) {
+    public void setUn_medida(Un_medida un_medida) {
         this.un_medida = un_medida;
     }
 
@@ -83,11 +92,12 @@ public class Produto {
         this.fornecedor = fornecedor;
     }
 
-    public Produto(String descricao, String cod_barras, double valor_unt, String categoria, String un_medida, Marca marca, Fornecedor fornecedor) {
+    public Produto(String descricao, String cod_barras, double valor_unt, String categoria, String foto, Un_medida un_medida, Marca marca, Fornecedor fornecedor) {
         this.descricao = descricao;
         this.cod_barras = cod_barras;
         this.valor_unt = valor_unt;
         this.categoria = categoria;
+        this.foto = foto;
         this.un_medida = un_medida;
         this.marca = marca;
         this.fornecedor = fornecedor;

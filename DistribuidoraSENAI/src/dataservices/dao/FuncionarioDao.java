@@ -33,7 +33,7 @@ public class FuncionarioDao {
     public void save(Funcionario funcionario) {
         int id = 0;
 
-        String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email) VALUES (?,?,?,?,?,?,?)";
+        String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email, foto) VALUES (?,?,?,?,?,?,?,?)";
         String sql2 = "INSERT INTO funcionario(data_contratacao, salario, cargo, usuario, senha, Pessoa_id_pessoa) VALUES (?.?,?,?,?,?)";
 
         //Como possui auto increment necessita destes selects
@@ -52,6 +52,7 @@ public class FuncionarioDao {
             pstmt1.setString(5, funcionario.getTelefone());
             pstmt1.setString(6, funcionario.getCelular());
             pstmt1.setString(7, funcionario.getEmail());
+            pstmt1.setString(8, funcionario.getFoto());
             pstmt1.execute();
 
             ResultSet res7 = pstmt3.executeQuery(sql3);
@@ -76,7 +77,6 @@ public class FuncionarioDao {
         String sql = "SELECT * FROM funcionario WHERE id_funcionario = " + id;
 
         Funcionario funcionario = new Funcionario();
-        Pessoa pessoa = new Pessoa();
 
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
@@ -103,6 +103,7 @@ public class FuncionarioDao {
                     funcionario.setTelefone(res2.getString("telefone"));
                     funcionario.setCelular(res2.getString("celular"));
                     funcionario.setEmail(res2.getString("email"));
+                    funcionario.setFoto(res2.getString("foto"));
 
                 }
             }
@@ -201,6 +202,7 @@ public class FuncionarioDao {
                     funcionario.setTelefone(res2.getString("telefone"));
                     funcionario.setCelular(res2.getString("celular"));
                     funcionario.setEmail(res2.getString("email"));
+                    funcionario.setFoto(res2.getString("foto"));
 
                 }
                 lista.add(funcionario);
@@ -212,7 +214,7 @@ public class FuncionarioDao {
     }
 
     public void update(Funcionario funcionario) {
-        String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = ? WHERE id_pessoa = ?";
+        String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = , foto = ? WHERE id_pessoa = ?";
         String sql2 = "UPDATE tb_funcionario SET (data_contratacao=?, salario=?, cargo=?, usuario=?, senha-? WHERE id_funcionario = ?";
 
         try {
@@ -239,7 +241,8 @@ public class FuncionarioDao {
                 pstmt1.setString(5, funcionario.getTelefone());
                 pstmt1.setString(6, funcionario.getCelular());
                 pstmt1.setString(7, funcionario.getEmail());
-                pstmt1.setInt(8, id_pessoa);
+                pstmt1.setString(8, funcionario.getFoto());
+                pstmt1.setInt(9, id_pessoa);
                 pstmt1.execute();
 
             }

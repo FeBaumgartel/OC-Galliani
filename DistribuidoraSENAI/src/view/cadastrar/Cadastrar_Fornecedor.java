@@ -8,8 +8,7 @@ package view.cadastrar;
 import dataservices.dao.FornecedorDao;
 import domain.Fornecedor;
 import java.awt.Color;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 /**
@@ -23,6 +22,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
      */
     public Cadastrar_Fornecedor() {
         initComponents();
+        limpaCampos();
     }
 
     /**
@@ -34,6 +34,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         btConfirmar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
@@ -212,6 +213,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
             repaint();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -231,7 +233,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
         return new Fornecedor(usuario, senha, nome, cpf, rg, telefone, email);
 
     }
-    private void limpaCampoDetexto() {
+    private void limpaCampos() {
         txNome.setText("");
         txNomeFantasia.setText("");
         txCnpj.setText("");
@@ -244,6 +246,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btConfirmar;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbCnpj;

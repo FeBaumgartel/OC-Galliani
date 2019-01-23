@@ -8,8 +8,7 @@ package view.cadastrar;
 import dataservices.dao.MarcaDao;
 import domain.Marca;
 import java.awt.Color;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 /**
@@ -23,6 +22,7 @@ public class Cadastrar_Marca extends javax.swing.JFrame {
      */
     public Cadastrar_Marca() {
         initComponents();
+        limpaCampos();
     }
 
     /**
@@ -127,6 +127,7 @@ public class Cadastrar_Marca extends javax.swing.JFrame {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
             repaint();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -141,7 +142,7 @@ public class Cadastrar_Marca extends javax.swing.JFrame {
         return new Marca(nome, endereco);
 
     }
-    private void limpaCampoDetexto() {
+    private void limpaCampos() {
         txNome.setText("");
         txEndereco.setText("");
     }

@@ -70,24 +70,18 @@ public class Funcionario extends Pessoa {
         this.senha = senha;
     }
 
-    public Funcionario(Date contratacao, double salario, String cargo, String usuario, String senha, String nome, String cpf, String rg, Date nascimento, String telefone, String celular, String email) {
-        Pessoa pessoa = new Pessoa();
+    public Funcionario(Date contratacao, double salario, String cargo, String usuario, String senha, String nome, String cpf, String rg, Date nascimento, String telefone, String celular, String email, String foto) {
+        super(nome,cpf,rg,nascimento,telefone,celular,email,foto);
         this.contratacao = contratacao;
         this.salario = salario;
         this.cargo = cargo;
         this.usuario = usuario;
         this.senha = senha;
-        pessoa.setNome(nome);
-        pessoa.setCpf(cpf);
-        pessoa.setRg(rg);
-        pessoa.setNascimento(nascimento);
-        pessoa.setTelefone(telefone);
-        pessoa.setCelular(celular);
-        pessoa.setEmail(email);
     }
 
     public Funcionario() {
     }
+
 
     public boolean verificarUser(Funcionario a) {
         List<Funcionario> lista = dao.list();
@@ -109,5 +103,7 @@ public class Funcionario extends Pessoa {
         }
         return false;
     }
+
+    
     FuncionarioDao dao = new FuncionarioDao();
 }

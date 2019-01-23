@@ -26,14 +26,8 @@ public class Cliente extends Pessoa {
     public Cliente() {
     }
 
-    public Cliente(String nome, String cpf, String rg, Date nascimento, String telefone, String celular, String email) {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(nome);
-        pessoa.setCpf(cpf);
-        pessoa.setRg(rg);
-        pessoa.setNascimento(nascimento);
-        pessoa.setTelefone(telefone);
-        pessoa.setCelular(celular);
-        pessoa.setEmail(email);
+    public Cliente(String nome, String cpf, String rg, Date nascimento, String telefone, String celular, String email, String foto) {
+        super(nome,cpf,rg,nascimento,telefone,celular,email,foto);
     }
+
 }

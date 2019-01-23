@@ -5,15 +5,17 @@
  */
 package view.alterar;
 
-import view.cadastrar.*;
-import domain.Fornecedor;
-import domain.Marca;
+import dataservices.dao.FornecedorDao;
+import dataservices.dao.MarcaDao;
+import dataservices.dao.ProdutoDao;
+import dataservices.dao.Un_medidaDao;
 import domain.Produto;
 import java.awt.Color;
 import java.awt.Image;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 /**
@@ -27,6 +29,9 @@ public class Alterar_Produto extends javax.swing.JFrame {
      */
     public Alterar_Produto() {
         initComponents();
+        limpaCampos();
+        ImageIcon image = new ImageIcon(diretorio);
+        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
 //        ImageIcon image = new ImageIcon(arquivo.getSelectedFile().getPath());
 //        lblFoto.setIcon(new ImageIcon(image.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT)));
     }
@@ -47,7 +52,6 @@ public class Alterar_Produto extends javax.swing.JFrame {
         txDescricao = new javax.swing.JTextField();
         txCod_barras = new javax.swing.JTextField();
         txVal_unitario = new javax.swing.JTextField();
-        lbImg = new javax.swing.JLabel();
         btAlterar = new javax.swing.JButton();
         btRemover = new javax.swing.JButton();
         lbImagem = new javax.swing.JLabel();
@@ -63,6 +67,7 @@ public class Alterar_Produto extends javax.swing.JFrame {
         cbMarca = new javax.swing.JComboBox();
         cbFornecedor = new javax.swing.JComboBox();
         cbUn_medida = new javax.swing.JComboBox();
+        lbImg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,8 +89,6 @@ public class Alterar_Produto extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
-        lbImg.setText("jLabel1");
-
         btAlterar.setText("Alterar");
         btAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +97,11 @@ public class Alterar_Produto extends javax.swing.JFrame {
         });
 
         btRemover.setText("Remover");
+        btRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRemoverActionPerformed(evt);
+            }
+        });
 
         lbImagem.setText("Imagem");
 
@@ -111,13 +119,16 @@ public class Alterar_Produto extends javax.swing.JFrame {
 
         lbUn_medida.setText("Unidade de medida");
 
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Refrigerante", "Sucos", "Água", "Vinha", "Whisky", "Coquetel", "Outros" }));
 
-        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMarca.setModel(new javax.swing.DefaultComboBoxModel(dao.getMarca().toArray()));
 
-        cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel(dao.getFornecedor().toArray()));
 
-        cbUn_medida.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbUn_medida.setModel(new javax.swing.DefaultComboBoxModel(dao.getUn_medida().toArray()));
+
+        lbImg.setMaximumSize(new java.awt.Dimension(140, 140));
+        lbImg.setMinimumSize(new java.awt.Dimension(140, 140));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,9 +137,7 @@ public class Alterar_Produto extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(lbMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cbUn_medida, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,26 +156,24 @@ public class Alterar_Produto extends javax.swing.JFrame {
                                 .addComponent(lbMarca)
                                 .addComponent(lbFornecedor)
                                 .addComponent(lbUn_medida)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(lbImg)
-                                .addGap(60, 60, 60))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(btAlterar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btRemover))
-                            .addComponent(lbImagem)))))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(btAlterar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btRemover))
+                                .addComponent(lbImg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbImagem))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbDescricao)
-                            .addComponent(lbImagem))
+                        .addComponent(lbDescricao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,23 +189,23 @@ public class Alterar_Produto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbMarca)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbFornecedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbUn_medida))
+                        .addComponent(lbMarca))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(lbImg))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                        .addComponent(lbImagem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbImg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAlterar)
                             .addComponent(btRemover))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbFornecedor)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbUn_medida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbUn_medida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -267,12 +274,37 @@ public class Alterar_Produto extends javax.swing.JFrame {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
             repaint();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
+        JFileChooser fc1 = new JFileChooser();
 
+        int res = fc1.showOpenDialog(null);
+
+        File caminho = null;
+
+        if (res == JFileChooser.APPROVE_OPTION) {
+
+            caminho = fc1.getSelectedFile();
+            diretorio = caminho.getPath();
+            ImageIcon image = new ImageIcon(diretorio);
+            lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+            System.out.println(diretorio);
+            repaint();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Operação cancelada.");
+
+        }
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
+        diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto_produto.jpg";
+        ImageIcon image = new ImageIcon(diretorio);
+        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+    }//GEN-LAST:event_btRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,14 +313,20 @@ public class Alterar_Produto extends javax.swing.JFrame {
         String descricao = txDescricao.getText();
         String cod_barras = txCod_barras.getText();
         double valor_unt = Double.parseDouble(txVal_unitario.getText());
-        String categoria = cbCategoria.getSelectedItem();
-        Marca marca = cbMarca.getSelectedItem();
-        Fornecedor fornecedor = cbFornecedor.getSelectedItem();
-        String un_medida = cbUn_medida.getSelectedItem();
+        String categoria = (String) cbCategoria.getSelectedItem();
 
-        return new Produto(descricao, cod_barras, valor_unt, categoria, un_medida, marca, fornecedor);
+        String marca = (String) cbMarca.getSelectedItem();
+        String fornecedor = (String) cbFornecedor.getSelectedItem();
+        String un_medida = (String) cbUn_medida.getSelectedItem();
+        String imagem = diretorio;
+        int idmarca = Integer.parseInt(marca.substring(0, marca.indexOf(" ")));
+        int idfornecedor = Integer.parseInt(fornecedor.substring(0, fornecedor.indexOf(" ")));
+        int idun_medida = Integer.parseInt(un_medida.substring(0, un_medida.indexOf(" ")));
+
+        return new Produto(descricao, cod_barras, valor_unt, categoria, imagem, unDao.getById(idun_medida), marcaDao.getById(idmarca), fornDao.getById(idfornecedor));
     }
-    private void limpaCampoDetexto() {
+
+    private void limpaCampos() {
         txDescricao.setText("");
         txCod_barras.setText("");
         txVal_unitario.setText("");
@@ -297,6 +335,11 @@ public class Alterar_Produto extends javax.swing.JFrame {
         cbFornecedor.setSelectedIndex(1);
         cbUn_medida.setSelectedIndex(1);
     }
+    private ProdutoDao dao = new ProdutoDao();
+    private Un_medidaDao unDao = new Un_medidaDao();
+    private MarcaDao marcaDao = new MarcaDao();
+    private FornecedorDao fornDao = new FornecedorDao();
+    private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto_produto.jpg";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCancelar;

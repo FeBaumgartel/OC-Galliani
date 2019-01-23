@@ -95,14 +95,14 @@ public class MarcaDao {
     }
 
     public void update(Marca marca) {
-        String sql1 = "UPDATE pessoa SET nome = ?, endereco_eletronico = ? WHERE id_marca = ?";
+        String sql1 = "UPDATE marca SET nome = ?, endereco_eletronico = ? WHERE id_marca = ?";
 
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
 
             pstmt1.setString(1, marca.getNome());
             pstmt1.setString(2, marca.getEndereco_eletronico());
-            pstmt1.setInt(8, marca.getId_marca());
+            pstmt1.setInt(3, marca.getId_marca());
             pstmt1.execute();
 
         } catch (SQLException e) {
