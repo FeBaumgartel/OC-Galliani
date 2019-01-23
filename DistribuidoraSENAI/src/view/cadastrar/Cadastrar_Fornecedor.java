@@ -5,6 +5,7 @@
  */
 package view.cadastrar;
 
+import dataservices.dao.FornecedorDao;
 import domain.Fornecedor;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -203,7 +204,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
                 txRamo.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-
+            dao.save(criarFornecedor());
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
@@ -239,6 +240,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
         txInscricao.setText("");
         txRamo.setText("");
     }
+    FornecedorDao dao = new FornecedorDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btConfirmar;

@@ -41,7 +41,6 @@ public class Alterar_Cliente extends javax.swing.JFrame {
         txNome = new javax.swing.JTextField();
         txCPF = new javax.swing.JTextField();
         txRG = new javax.swing.JTextField();
-        txDataNasc = new javax.swing.JTextField();
         txTelefone = new javax.swing.JTextField();
         txCelular = new javax.swing.JTextField();
         txEmail = new javax.swing.JTextField();
@@ -57,6 +56,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
         lbCelular = new javax.swing.JLabel();
         lbEmail = new javax.swing.JLabel();
         lbMsg = new javax.swing.JLabel();
+        txDataNasc = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +105,12 @@ public class Alterar_Cliente extends javax.swing.JFrame {
 
         lbEmail.setText("Email");
 
+        try {
+            txDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-##-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -116,22 +122,23 @@ public class Alterar_Cliente extends javax.swing.JFrame {
                         .addComponent(lbMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbNome)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txRG, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbRG, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txNome, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbDataNasc)
-                            .addComponent(lbTelefone)
-                            .addComponent(lbCelular)
-                            .addComponent(lbEmail))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbNome)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txEmail, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txCelular, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txRG, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbCPF, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbRG, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txNome, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                                .addComponent(lbDataNasc)
+                                .addComponent(lbTelefone)
+                                .addComponent(lbCelular)
+                                .addComponent(lbEmail)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
@@ -266,7 +273,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     ClienteDao dao;
 
     private Cliente criarCliente() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
         String Nome = txNome.getText();
         String cpf = txCPF.getText();
         String rg = txRG.getText();
@@ -306,10 +313,11 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel lbTelefone;
     private javax.swing.JTextField txCPF;
     private javax.swing.JTextField txCelular;
-    private javax.swing.JTextField txDataNasc;
+    private javax.swing.JFormattedTextField txDataNasc;
     private javax.swing.JTextField txEmail;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txRG;
     private javax.swing.JTextField txTelefone;
     // End of variables declaration//GEN-END:variables
+    
 }

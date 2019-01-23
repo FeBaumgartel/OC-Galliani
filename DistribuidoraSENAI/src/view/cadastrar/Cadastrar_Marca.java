@@ -5,6 +5,7 @@
  */
 package view.cadastrar;
 
+import dataservices.dao.MarcaDao;
 import domain.Marca;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -117,7 +118,8 @@ public class Cadastrar_Marca extends javax.swing.JFrame {
                 txNome.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-
+            
+            dao.save(criarMarca());
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
@@ -143,6 +145,7 @@ public class Cadastrar_Marca extends javax.swing.JFrame {
         txNome.setText("");
         txEndereco.setText("");
     }
+    MarcaDao dao=new MarcaDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btConfirmar;

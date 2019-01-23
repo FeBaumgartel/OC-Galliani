@@ -5,6 +5,7 @@
  */
 package view.alterar;
 
+import dataservices.dao.FornecedorDao;
 import domain.Fornecedor;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -157,9 +158,9 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
                 .addComponent(lbTelefone)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(lbMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -203,7 +204,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
                 txRamo.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-
+            dao.update(criarFornecedor());
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
@@ -212,13 +213,15 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
             lbMsg.setForeground(Color.red);
             repaint();
         }
+
+
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
      */
     private Fornecedor criarFornecedor() {
-        
+
         String nome = txNome.getText();
         String usuario = txInscricao.getText();
         String senha = txRamo.getText();
@@ -230,6 +233,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
         return new Fornecedor(usuario, senha, nome, cpf, rg, telefone, email);
 
     }
+
     private void limpaCampoDetexto() {
         txNome.setText("");
         txNomeFantasia.setText("");
@@ -239,6 +243,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
         txInscricao.setText("");
         txRamo.setText("");
     }
+    FornecedorDao dao = new FornecedorDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
     private javax.swing.JButton btConfirmar;
