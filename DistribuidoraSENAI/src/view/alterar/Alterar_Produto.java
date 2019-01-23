@@ -266,7 +266,7 @@ public class Alterar_Produto extends javax.swing.JFrame {
                 cbUn_medida.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-
+            dao.update(criarProduto());
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();

@@ -5,6 +5,7 @@
  */
 package view.alterar;
 
+import dataservices.dao.FuncionarioDao;
 import domain.Funcionario;
 import java.awt.Color;
 import java.awt.Image;
@@ -351,7 +352,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
                 txSenha.setBorder(new LineBorder(Color.red));
                 repaint();
             }
-
+            dao.update(criarFuncionario());
             lbMsg.setText("Alteração realizada com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
@@ -416,6 +417,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
         txUsuario.setText("");
         txSenha.setText("");
     }
+    FuncionarioDao dao = new FuncionarioDao();
     private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto.jpg";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;

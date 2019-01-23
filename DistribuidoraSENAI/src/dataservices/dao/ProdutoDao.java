@@ -33,8 +33,6 @@ public class ProdutoDao {
     }
 
     public void save(Produto produto) {
-        int id = 0;
-
         String sql1 = "INSERT INTO produto(descricao, codigo_barras, valor_unitario, categoria, foto, unidade_de_media, id_Marca, id_Fornecedor) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
@@ -51,10 +49,11 @@ public class ProdutoDao {
             pstmt1.setInt(8, produto.getFornecedor().getId_fornecedor());
             pstmt1.execute();
 
+            pstmt1.close();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Produto getById(long id) {
@@ -91,6 +90,7 @@ public class ProdutoDao {
                     marca.setEndereco_eletronico(res2.getString("endereco_eletronico"));
                 }
                 produto.setMarca(marca);
+                pstmt2.close();
 
                 String sql3 = "SELECT * FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY  ASC";
                 PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
@@ -107,6 +107,7 @@ public class ProdutoDao {
                     fornecedor.setRamo_negocio(res3.getString("ramo_negocio"));
                 }
                 produto.setFornecedor(fornecedor);
+                pstmt3.close();
 
                 String sql4 = "SELECT * FROM unidade_de_medida WHERE id_unidade_de_medida = " + idunidade + " ORDER BY  ASC";
                 PreparedStatement pstmt4 = (PreparedStatement) connection.prepareStatement(sql4);
@@ -117,12 +118,12 @@ public class ProdutoDao {
                     unidade.setNome(res4.getString("nome"));
                 }
                 produto.setUn_medida(unidade);
-
+                pstmt4.close();
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return produto;
     }
 
@@ -161,6 +162,7 @@ public class ProdutoDao {
                     marca.setEndereco_eletronico(res2.getString("endereco_eletronico"));
                 }
                 produto.setMarca(marca);
+                pstmt2.close();
 
                 String sql3 = "SELECT * FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY  ASC";
                 PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
@@ -177,6 +179,7 @@ public class ProdutoDao {
                     fornecedor.setRamo_negocio(res3.getString("ramo_negocio"));
                 }
                 produto.setFornecedor(fornecedor);
+                pstmt3.close();
 
                 String sql4 = "SELECT * FROM unidade_de_medida WHERE id_unidade_de_medida = " + idunidade + " ORDER BY  ASC";
                 PreparedStatement pstmt4 = (PreparedStatement) connection.prepareStatement(sql4);
@@ -188,7 +191,9 @@ public class ProdutoDao {
                 }
                 produto.setUn_medida(unidade);
                 lista.add(produto);
+                pstmt4.close();
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -207,6 +212,7 @@ public class ProdutoDao {
                 marca = res1.getString("nome");
                 lista.add(marca);
             }
+            pstmt1.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -226,13 +232,14 @@ public class ProdutoDao {
                 fornecedor = res1.getString("nome");
                 lista.add(fornecedor);
             }
+            pstmt1.close();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return lista;
     }
-    
+
     public List<String> getUn_medida() {
         String sql1 = "SELECT nome FROM unidade_de_medida ORDER BY nome ASC";
 
@@ -245,7 +252,7 @@ public class ProdutoDao {
                 unidade = res1.getString("nome");
                 lista.add(unidade);
             }
-
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -270,9 +277,8 @@ public class ProdutoDao {
                 pstmt1.setInt(8, produto.getFornecedor().getId_fornecedor());
                 pstmt1.setInt(9, produto.getId_produto());
                 pstmt1.execute();
-
             }
-
+            pstmt1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -30,18 +30,16 @@ public class MarcaDao {
     }
 
     public void save(Marca marca) {
-        int id = 0;
-
         String sql1 = "INSERT INTO marca(nome, endereco_eletronico) VALUES (?,?)";
 
         try {
-
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
 
             pstmt1.setString(1, marca.getNome());
             pstmt1.setString(2, marca.getEndereco_eletronico());
             pstmt1.execute();
 
+            pstmt1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -63,6 +61,7 @@ public class MarcaDao {
                 marca.setNome(res1.getString("nome"));
                 marca.setEndereco_eletronico(res1.getString("endereco_eletronico"));
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -88,6 +87,7 @@ public class MarcaDao {
 
                 lista.add(marca);
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -105,6 +105,7 @@ public class MarcaDao {
             pstmt1.setInt(3, marca.getId_marca());
             pstmt1.execute();
 
+            pstmt1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

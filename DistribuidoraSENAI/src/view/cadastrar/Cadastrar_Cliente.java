@@ -5,6 +5,7 @@
  */
 package view.cadastrar;
 
+import dataservices.dao.ClienteDao;
 import domain.Cliente;
 import java.awt.Color;
 import java.awt.Image;
@@ -272,6 +273,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
                 repaint();
             }
 
+            dao.update(criarCliente());
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
@@ -324,6 +326,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
         txEmail.setText("");
         txDataNasc.setText("");
     }
+    ClienteDao dao = new ClienteDao();
     private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto.jpg";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;

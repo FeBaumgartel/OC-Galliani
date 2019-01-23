@@ -36,11 +36,9 @@ public class ClienteDao {
         String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email, foto) VALUES (?,?,?,?,?,?,?,?)";
         String sql2 = "INSERT INTO cliente(Pessoa_id_pessoa) VALUES (?)";
 
-        //Como possui auto increment necessita destes selects
         String sql3 = "SELECT MAX(id_pessoa) FROM pessoa";
 
         try {
-
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
             PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
@@ -55,17 +53,20 @@ public class ClienteDao {
             pstmt1.setString(7, cliente.getFoto());
             pstmt1.execute();
 
-            ResultSet res7 = pstmt3.executeQuery(sql3);
-            while (res7.next()) {
-                id = res7.getInt("MAX(id_pessoa)");
+            pstmt1.close();
+
+            ResultSet res3 = pstmt3.executeQuery(sql3);
+            while (res3.next()) {
+                id = res3.getInt("MAX(id_pessoa)");
             }
             pstmt2.setInt(1, id);
             pstmt2.execute();
 
+            pstmt2.close();
+            pstmt3.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Pessoa getById(long id) {
@@ -78,7 +79,6 @@ public class ClienteDao {
             ResultSet res1 = pstmt1.executeQuery(sql);
 
             while (res1.next()) {
-
                 cliente.setId_cliente(res1.getInt("id_cliente"));
                 int idPessoa = res1.getInt("Pessoa_id_pessoa");
 
@@ -97,7 +97,9 @@ public class ClienteDao {
                     cliente.setFoto(res2.getString("foto"));
 
                 }
+                pstmt2.close();
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -136,7 +138,9 @@ public class ClienteDao {
 
                 }
                 lista.add(cliente);
+                pstmt2.close();
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -164,9 +168,20 @@ public class ClienteDao {
                 pstmt1.setString(8, cliente.getFoto());
                 pstmt1.setInt(9, id_pessoa);
                 pstmt1.execute();
-
             }
+            pstmt1.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void delete(Long id) {
+        //String sql1 = "SELECT id_pessoa FROM cliente WHERE id_cliente = " + id;
+        String sql2 = "DELETE FROM cliente WHERE id_cliente =" + id;
+        try {
+
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
         } catch (SQLException e) {
             e.printStackTrace();
         }

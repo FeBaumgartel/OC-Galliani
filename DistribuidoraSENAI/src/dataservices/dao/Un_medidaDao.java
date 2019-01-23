@@ -44,6 +44,7 @@ public class Un_medidaDao {
 
                 lista.add(un_medida);
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -63,10 +64,10 @@ public class Un_medidaDao {
                 un_medida.setId_unidade(res1.getInt("id_unidade_de_medida"));
                 un_medida.setNome(res1.getString("nome"));
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return un_medida;
     }
 }

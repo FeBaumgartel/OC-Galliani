@@ -36,7 +36,6 @@ public class FuncionarioDao {
         String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email, foto) VALUES (?,?,?,?,?,?,?,?)";
         String sql2 = "INSERT INTO funcionario(data_contratacao, salario, cargo, usuario, senha, Pessoa_id_pessoa) VALUES (?.?,?,?,?,?)";
 
-        //Como possui auto increment necessita destes selects
         String sql3 = "SELECT MAX(id_pessoa) FROM pessoa";
 
         try {
@@ -55,17 +54,22 @@ public class FuncionarioDao {
             pstmt1.setString(8, funcionario.getFoto());
             pstmt1.execute();
 
-            ResultSet res7 = pstmt3.executeQuery(sql3);
-            while (res7.next()) {
-                id = res7.getInt("MAX(id_pessoa)");
+            pstmt1.close();
+
+            ResultSet res3 = pstmt3.executeQuery(sql3);
+            while (res3.next()) {
+                id = res3.getInt("MAX(id_pessoa)");
             }
-            pstmt1.setDate(1, (java.sql.Date) funcionario.getContratacao());
-            pstmt1.setDouble(2, funcionario.getSalario());
-            pstmt1.setString(3, funcionario.getCargo());
-            pstmt1.setString(4, funcionario.getUsuario());
-            pstmt1.setString(5, funcionario.getSenha());
+            pstmt2.setDate(1, (java.sql.Date) funcionario.getContratacao());
+            pstmt2.setDouble(2, funcionario.getSalario());
+            pstmt2.setString(3, funcionario.getCargo());
+            pstmt2.setString(4, funcionario.getUsuario());
+            pstmt2.setString(5, funcionario.getSenha());
             pstmt2.setInt(6, id);
             pstmt2.execute();
+
+            pstmt2.close();
+            pstmt3.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,11 +110,12 @@ public class FuncionarioDao {
                     funcionario.setFoto(res2.getString("foto"));
 
                 }
+                pstmt2.close();
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return funcionario;
     }
 
@@ -142,31 +147,32 @@ public class FuncionarioDao {
             ResultSet res1 = pstmt1.executeQuery(sql);
 
             if (res1.getString("senha") != null) {
+                pstmt1.close();
                 return true;
             } else {
+                pstmt1.close();
                 return false;
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
         return false;
     }
-    
+
     public String getCargo(String usuario, String senha) {
         String sql = "SELECT * FROM funcionario WHERE usuario = " + usuario + " AND senha = " + senha;
-        String cargo="";
+        String cargo = "";
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
             ResultSet res1 = pstmt1.executeQuery(sql);
 
-            cargo=res1.getString("cargo");
+            cargo = res1.getString("cargo");
 
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
         return cargo;
     }
 
@@ -206,7 +212,9 @@ public class FuncionarioDao {
 
                 }
                 lista.add(funcionario);
+                pstmt2.close();
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -227,6 +235,8 @@ public class FuncionarioDao {
             pstmt2.setInt(5, funcionario.getId_funcionario());
             pstmt2.execute();
 
+            pstmt2.close();
+
             String sql3 = "SELECT Pessoa_id_pessoa FROM funcionario";
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
@@ -246,6 +256,8 @@ public class FuncionarioDao {
                 pstmt1.execute();
 
             }
+            pstmt1.close();
+            pstmt3.close();
 
         } catch (SQLException e) {
             e.printStackTrace();

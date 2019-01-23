@@ -30,12 +30,9 @@ public class FornecedorDao {
     }
 
     public void save(Fornecedor fornecedor) {
-        int id = 0;
-
         String sql1 = "INSERT INTO fornecedor(nome, nome_fantasia, cnpj, telefone, email, inscricao_estadual, ramo_negocio) VALUES (?,?,?,?,?,?,?)";
 
         try {
-
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
 
             pstmt1.setString(1, fornecedor.getNome());
@@ -47,10 +44,10 @@ public class FornecedorDao {
             pstmt1.setString(7, fornecedor.getRamo_negocio());
             pstmt1.execute();
 
+            pstmt1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Fornecedor getById(long id) {
@@ -73,6 +70,7 @@ public class FornecedorDao {
                 fornecedor.setInscricao_estadual(res1.getString("inscricao_estadual"));
                 fornecedor.setRamo_negocio(res1.getString("ramo_negocio"));
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -103,6 +101,7 @@ public class FornecedorDao {
 
                 lista.add(fornecedor);
             }
+            pstmt1.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -125,6 +124,7 @@ public class FornecedorDao {
             pstmt1.setInt(8, fornecedor.getId_fornecedor());
             pstmt1.execute();
 
+            pstmt1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
