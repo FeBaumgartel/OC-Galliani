@@ -1,1 +1,2 @@
-1- lists dos DAOs dando null point exception
+1- nao insere a data no textefield de alterar
+2- não deleta(clienteDao linha 232

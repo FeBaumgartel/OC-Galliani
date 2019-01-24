@@ -135,7 +135,7 @@ public class Consulta_Produto extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcActionPerformed
 
     private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             String desc = txBusca.getText();
             atualizarTabelaFiltro(desc);
         }
@@ -160,7 +160,7 @@ public class Consulta_Produto extends javax.swing.JFrame {
     private void atualizarTabela() {
         jTable1.setModel(carregarTabela());
     }
-    
+
     private TableModel carregarTabela(String desc) {
         List<Produto> lista = dao.listDesc(desc);
         ptm = new ProdutoTableModel(lista);
@@ -170,8 +170,8 @@ public class Consulta_Produto extends javax.swing.JFrame {
     private void atualizarTabelaFiltro(String desc) {
         jTable1.setModel(carregarTabela(desc));
     }
-    
-    ProdutoDao dao;
+
+    ProdutoDao dao = new ProdutoDao();
     private ProdutoTableModel ptm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;

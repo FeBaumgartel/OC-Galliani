@@ -145,6 +145,7 @@ public class ClienteDao {
             }
             pstmt1.close();
         } catch (SQLException ex) {
+            System.out.println("oi");
             ex.printStackTrace();
         }
         return lista;
@@ -221,14 +222,14 @@ public class ClienteDao {
     }
 
     public void delete(int id) {
-        String sql1 = "SELECT id_pessoa FROM cliente WHERE id_cliente = " + id;
+        String sql1 = "SELECT pessoa_id_pessoa FROM cliente WHERE id_cliente = " + id;
         String sql2 = "DELETE FROM cliente WHERE id_cliente = " + id;
         try {
 
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             ResultSet res1 = pstmt1.executeQuery(sql1);
 
-            int idpessoa = res1.getInt("Pessoa_id_pessoa");
+            int idpessoa = res1.getInt("pessoa_id_pessoa");
             pstmt1.close();
 
             String sql3 = "DELETE FROM pessoa Where id_pessoa = " + idpessoa;

@@ -25,8 +25,7 @@ public class Consulta_Cliente extends javax.swing.JFrame {
      */
     public Consulta_Cliente() {
         initComponents();
-        //atualizarTabela();
-        System.out.println(dao.list());
+        atualizarTabela();
     }
 
     /**
@@ -137,7 +136,7 @@ public class Consulta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcActionPerformed
 
     private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             String nome = txBusca.getText();
             atualizarTabelaFiltro(nome);
         }
@@ -161,6 +160,7 @@ public class Consulta_Cliente extends javax.swing.JFrame {
     private void atualizarTabela() {
         jTable1.setModel(carregarTabela());
     }
+
     private TableModel carregarTabelaFiltro(String nome) {
         List<Cliente> lista = dao.listNome(nome);
         ctm = new ClienteTableModel(lista);
@@ -171,7 +171,7 @@ public class Consulta_Cliente extends javax.swing.JFrame {
         jTable1.setModel(carregarTabelaFiltro(nome));
     }
 
-    private ClienteDao dao;
+    private ClienteDao dao = new ClienteDao();
     private ClienteTableModel ctm;
 
 

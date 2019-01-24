@@ -135,7 +135,7 @@ public class Consulta_Marca extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcActionPerformed
 
     private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
-        if(evt.getKeyCode() == evt.VK_ENTER){
+        if (evt.getKeyCode() == evt.VK_ENTER) {
             String nome = txBusca.getText();
             atualizarTabelaFiltro(nome);
         }
@@ -151,7 +151,6 @@ public class Consulta_Marca extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
     private TableModel carregarTabela() {
         List<Marca> lista = dao.list();
         mtm = new MarcaTableModel(lista);
@@ -161,6 +160,7 @@ public class Consulta_Marca extends javax.swing.JFrame {
     private void atualizarTabela() {
         jTable1.setModel(carregarTabela());
     }
+
     private TableModel carregarTabelaFiltro(String nome) {
         List<Marca> lista = dao.listNome(nome);
         mtm = new MarcaTableModel(lista);
@@ -170,8 +170,8 @@ public class Consulta_Marca extends javax.swing.JFrame {
     private void atualizarTabelaFiltro(String nome) {
         jTable1.setModel(carregarTabelaFiltro(nome));
     }
-    
-    MarcaDao dao;
+
+    MarcaDao dao = new MarcaDao();
     private MarcaTableModel mtm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;

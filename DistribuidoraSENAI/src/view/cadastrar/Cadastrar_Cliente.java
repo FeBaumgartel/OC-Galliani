@@ -31,6 +31,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
         limpaCampos();
         ImageIcon image = new ImageIcon(diretorio);
         lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+        System.out.println(dao.list());
     }
 
     /**

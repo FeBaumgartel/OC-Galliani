@@ -149,7 +149,6 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private TableModel carregarTabela() {
-        System.out.println("oi");
         List<Fornecedor> lista = dao.list();
         ftm = new FornecedorTableModel(lista);
         return ftm;
@@ -169,7 +168,7 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
         jTable1.setModel(carregarTabelaFiltro(nome));
     }
 
-    FornecedorDao dao;
+    FornecedorDao dao = new FornecedorDao();
     private FornecedorTableModel ftm;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCad;
