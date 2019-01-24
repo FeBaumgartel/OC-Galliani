@@ -110,4 +110,27 @@ public class MarcaDao {
             e.printStackTrace();
         }
     }
+
+    public void delete(int id) {
+        String sql1 = "SELECT id_produto FROM produto WHERE id_marca = " + id;
+        String sql2 = "DELETE FROM marca WHERE id_marca = " + id;
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
+
+            while (res1.next()) {
+
+                int idProduto = res1.getInt("id_produto");
+                String sql3 = "DELETE produto FROM WHERE id_produto = " + idProduto;
+                PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
+                pstmt3.executeQuery(sql3);
+                pstmt3.close();
+            }
+            pstmt1.close();
+            PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
+            pstmt2.executeQuery(sql2);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

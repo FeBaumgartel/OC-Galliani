@@ -59,6 +59,11 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
         });
 
         btExc.setText("-");
+        btExc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,6 +117,11 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
     private void btCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadActionPerformed
         new Cadastrar_Fornecedor().setVisible(true);
     }//GEN-LAST:event_btCadActionPerformed
+
+    private void btExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcActionPerformed
+        Fornecedor a = ftm.getValueAT(jTable1.getSelectedRow());
+        dao.delete(a.getId_fornecedor());
+    }//GEN-LAST:event_btExcActionPerformed
 
     /**
      * @param args the command line arguments

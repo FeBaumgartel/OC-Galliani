@@ -87,9 +87,9 @@ public class ClienteDao {
                 ResultSet res2 = pstmt2.executeQuery(sql2);
 
                 while (res2.next()) {
-                    cliente.setNome(res2.getString("nm_pessoa"));
-                    cliente.setCpf(res2.getString("nr_cpf"));
-                    cliente.setRg(res2.getString("nr_rg"));
+                    cliente.setNome(res2.getString("nome"));
+                    cliente.setCpf(res2.getString("cpf"));
+                    cliente.setRg(res2.getString("rg"));
                     cliente.setNascimento(res2.getDate("nascimento"));
                     cliente.setTelefone(res2.getString("telefone"));
                     cliente.setCelular(res2.getString("celular"));
@@ -151,7 +151,7 @@ public class ClienteDao {
         String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = ?, foto = ? WHERE id_pessoa = ?";
 
         try {
-            String sql2 = "SELECT Pessoa_id_pessoa FROM cliente";
+            String sql2 = "SELECT Pessoa_id_pessoa FROM cliente WHERE id_cliente = "+cliente.getId_cliente();
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
             ResultSet res2 = pstmt2.executeQuery(sql2);
@@ -175,13 +175,22 @@ public class ClienteDao {
         }
     }
 
-    public void delete(Long id) {
-        //String sql1 = "SELECT id_pessoa FROM cliente WHERE id_cliente = " + id;
-        String sql2 = "DELETE FROM cliente WHERE id_cliente =" + id;
+    public void delete(int id) {
+        String sql1 = "SELECT id_pessoa FROM cliente WHERE id_cliente = " + id;
+        String sql2 = "DELETE FROM cliente WHERE id_cliente = " + id;
         try {
 
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             ResultSet res1 = pstmt1.executeQuery(sql1);
+
+            int idpessoa = res1.getInt("Pessoa_id_pessoa");
+            pstmt1.close();
+
+            String sql3 = "DELETE FROM pessoa Where id_pessoa = " + idpessoa;
+            PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
+            pstmt2.executeQuery(sql2);
+            PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
+            pstmt3.executeQuery(sql3);
         } catch (SQLException e) {
             e.printStackTrace();
         }

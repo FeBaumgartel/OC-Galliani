@@ -34,7 +34,7 @@ public class FuncionarioDao {
         int id = 0;
 
         String sql1 = "INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email, foto) VALUES (?,?,?,?,?,?,?,?)";
-        String sql2 = "INSERT INTO funcionario(data_contratacao, salario, cargo, usuario, senha, Pessoa_id_pessoa) VALUES (?.?,?,?,?,?)";
+        String sql2 = "INSERT INTO funcionario(data_contratacao, salario, cargo, usuario, senha, Pessoa_id_pessoa) VALUES (?,?,?,?,?,?)";
 
         String sql3 = "SELECT MAX(id_pessoa) FROM pessoa";
 
@@ -259,6 +259,27 @@ public class FuncionarioDao {
             pstmt1.close();
             pstmt3.close();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id) {
+        String sql1 = "SELECT id_pessoa FROM funcionario WHERE id_funcionario = " + id;
+        String sql2 = "DELETE FROM funcionario WHERE id_funcionario = " + id;
+        try {
+
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
+
+            int idpessoa = res1.getInt("Pessoa_id_pessoa");
+            pstmt1.close();
+
+            String sql3 = "DELETE FROM pessoa Where id_pessoa = " + idpessoa;
+            PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
+            pstmt2.executeQuery(sql2);
+            PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
+            pstmt3.executeQuery(sql3);
         } catch (SQLException e) {
             e.printStackTrace();
         }

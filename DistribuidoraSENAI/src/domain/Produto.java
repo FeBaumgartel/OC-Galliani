@@ -20,6 +20,18 @@ public class Produto {
     private Marca marca;
     private Fornecedor fornecedor;
 
+    public Produto(int id_produto, String descricao, String cod_barras, double valor_unt, String categoria, String foto, Un_medida un_medida, Marca marca, Fornecedor fornecedor) {
+        this.id_produto = id_produto;
+        this.descricao = descricao;
+        this.cod_barras = cod_barras;
+        this.valor_unt = valor_unt;
+        this.categoria = categoria;
+        this.foto = foto;
+        this.un_medida = un_medida;
+        this.marca = marca;
+        this.fornecedor = fornecedor;
+    }
+
     public String getFoto() {
         return foto;
     }

@@ -59,6 +59,11 @@ public class Consulta_Produto extends javax.swing.JFrame {
         });
 
         btExc.setText("-");
+        btExc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -97,7 +102,7 @@ public class Consulta_Produto extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -112,6 +117,11 @@ public class Consulta_Produto extends javax.swing.JFrame {
     private void btCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadActionPerformed
         new Cadastrar_Produto().setVisible(true);
     }//GEN-LAST:event_btCadActionPerformed
+
+    private void btExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcActionPerformed
+        Produto a = ptm.getValueAT(jTable1.getSelectedRow());
+        dao.delete(a.getId_produto());
+    }//GEN-LAST:event_btExcActionPerformed
 
     /**
      * @param args the command line arguments

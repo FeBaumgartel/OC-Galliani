@@ -19,6 +19,17 @@ public class Fornecedor {
     private String inscricao_estadual;
     private String ramo_negocio;
 
+    public Fornecedor(int id_fornecedor, String nome, String nome_fantasia, String cnpj, String telefone, String email, String inscricao_estadual, String ramo_negocio) {
+        this.id_fornecedor = id_fornecedor;
+        this.nome = nome;
+        this.nome_fantasia = nome_fantasia;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.email = email;
+        this.inscricao_estadual = inscricao_estadual;
+        this.ramo_negocio = ramo_negocio;
+    }
+
     public int getId_fornecedor() {
         return id_fornecedor;
     }

@@ -283,4 +283,13 @@ public class ProdutoDao {
             e.printStackTrace();
         }
     }
+    public void delete(int id) {
+        String sql1 = "DELETE FROM produto WHERE id_produto = " + id;
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            pstmt1.executeQuery(sql1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

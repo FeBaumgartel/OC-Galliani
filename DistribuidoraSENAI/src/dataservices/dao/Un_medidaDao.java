@@ -70,4 +70,13 @@ public class Un_medidaDao {
         }
         return un_medida;
     }
+    public void delete(int id) {
+        String sql1 = "DELETE FROM unidade_de_medida WHERE id_unidade_de_medida = " + id;
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            pstmt1.executeQuery(sql1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

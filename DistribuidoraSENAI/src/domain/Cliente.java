@@ -30,4 +30,9 @@ public class Cliente extends Pessoa {
         super(nome,cpf,rg,nascimento,telefone,celular,email,foto);
     }
 
+    public Cliente(int id_cliente, String nome, String cpf, String rg, Date nascimento, String telefone, String celular, String email, String foto) {
+        super(nome, cpf, rg, nascimento, telefone, celular, email, foto);
+        this.id_cliente = id_cliente;
+    }
+
 }

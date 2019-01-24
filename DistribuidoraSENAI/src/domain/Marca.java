@@ -14,6 +14,12 @@ public class Marca {
     private String nome;
     private String endereco_eletronico;
 
+    public Marca(int id_marca, String nome, String endereco_eletronico) {
+        this.id_marca = id_marca;
+        this.nome = nome;
+        this.endereco_eletronico = endereco_eletronico;
+    }
+
     public Marca() {
     }
 

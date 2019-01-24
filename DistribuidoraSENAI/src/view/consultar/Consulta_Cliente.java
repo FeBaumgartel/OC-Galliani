@@ -120,7 +120,8 @@ public class Consulta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btCadActionPerformed
 
     private void btExcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcActionPerformed
-        // TODO add your handling code here:
+        Cliente a = ctm.getValueAT(jTable1.getSelectedRow());
+        dao.delete(a.getId_cliente());
     }//GEN-LAST:event_btExcActionPerformed
 
     /**
@@ -128,8 +129,8 @@ public class Consulta_Cliente extends javax.swing.JFrame {
      */
     private TableModel carregarTabela() {
         List<Cliente> lista = dao.list();
-        ptm = new ClienteTableModel(lista);
-        return ptm;
+        ctm = new ClienteTableModel(lista);
+        return ctm;
     }
 
     private void atualizarTabela() {
@@ -137,7 +138,7 @@ public class Consulta_Cliente extends javax.swing.JFrame {
     }
 
     ClienteDao dao;
-    private ClienteTableModel ptm;
+    private ClienteTableModel ctm;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
