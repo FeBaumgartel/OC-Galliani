@@ -94,6 +94,30 @@ public class MarcaDao {
         return lista;
     }
 
+public List<Marca> listNome(String nome) {
+        String sql1 = "SELECT * FROM marca WHERE nome LIKE '%"+nome+"%' ORDER BY id_marca ASC";
+
+        List<Marca> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
+
+            while (res1.next()) {
+                Marca marca = new Marca();
+
+                marca.setId_marca(res1.getInt("id_marca"));
+                marca.setNome(res1.getString("nome"));
+                marca.setEndereco_eletronico(res1.getString("endereco_eletronico"));
+
+                lista.add(marca);
+            }
+            pstmt1.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
     public void update(Marca marca) {
         String sql1 = "UPDATE marca SET nome = ?, endereco_eletronico = ? WHERE id_marca = ?";
 

@@ -29,7 +29,7 @@ public class Cadastrar_Produto extends javax.swing.JFrame {
      */
     public Cadastrar_Produto() {
         initComponents();
-        limpaCampos();
+//        limpaCampos();
         ImageIcon image = new ImageIcon(diretorio);
         lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
 //        ImageIcon image = new ImageIcon(arquivo.getSelectedFile().getPath());
@@ -274,6 +274,10 @@ public class Cadastrar_Produto extends javax.swing.JFrame {
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        dao.save(criarProduto());
+            lbMsg.setText("Cadastro realizado com sucesso");
+            lbMsg.setForeground(Color.green);
+            repaint();
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
@@ -308,14 +312,15 @@ public class Cadastrar_Produto extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private Produto criarProduto() {
+        System.out.println(cbCategoria.getSelectedItem().toString());
         String descricao = txDescricao.getText();
         String cod_barras = txCod_barras.getText();
         double valor_unt = Double.parseDouble(txVal_unitario.getText());
-        String categoria = (String) cbCategoria.getSelectedItem();
-        String marca = (String) cbMarca.getSelectedItem();
-        String fornecedor = (String) cbFornecedor.getSelectedItem();
-        String un_medida = (String) cbUn_medida.getSelectedItem();
-        String imagem = diretorio;
+        String categoria = cbCategoria.getSelectedItem().toString();
+        String marca = cbMarca.getSelectedItem().toString();
+        String fornecedor = cbFornecedor.getSelectedItem().toString();
+        String un_medida = cbUn_medida.getSelectedItem().toString();
+        String imagem = "asd"/*diretorio*/;
 
         int idmarca = Integer.parseInt(marca.substring(0, marca.indexOf(" ")));
         int idfornecedor = Integer.parseInt(fornecedor.substring(0, fornecedor.indexOf(" ")));
@@ -324,15 +329,15 @@ public class Cadastrar_Produto extends javax.swing.JFrame {
         return new Produto(descricao, cod_barras, valor_unt, categoria, imagem, unDao.getById(idun_medida), marcaDao.getById(idmarca), fornDao.getById(idfornecedor));
     }
 
-    private void limpaCampos() {
-        txDescricao.setText("");
-        txCod_barras.setText("");
-        txVal_unitario.setText("");
-        cbCategoria.setSelectedIndex(0);
-        cbMarca.setSelectedIndex(0);
-        cbFornecedor.setSelectedIndex(0);
-        cbUn_medida.setSelectedIndex(0);
-    }
+//    private void limpaCampos() {
+//        txDescricao.setText("");
+//        txCod_barras.setText("");
+//        txVal_unitario.setText("");
+//        cbCategoria.setSelectedIndex(0);
+//        cbMarca.setSelectedIndex(0);
+//        cbFornecedor.setSelectedIndex(0);
+//        cbUn_medida.setSelectedIndex(0);
+//    }
     private ProdutoDao dao = new ProdutoDao();
     private Un_medidaDao unDao = new Un_medidaDao();
     private MarcaDao marcaDao = new MarcaDao();

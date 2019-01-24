@@ -109,7 +109,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConfirmarActionPerformed
-        FuncionarioDao funcDao = new FuncionarioDao();
+
         String user = txUsuario.getText();
         String senha = txSenha.getText();
         if (user.equals("")) {
@@ -122,12 +122,16 @@ public class Login extends javax.swing.JFrame {
             repaint();
         } else if (funcDao.verifUser(user)) {
             if (funcDao.verifSenha(user, senha)) {
-                if(funcDao.getCargo(user, senha).equals("Gerente")){
-                new PrincipalGerente().setVisible(true);
-                }else if(funcDao.getCargo(user, senha).equals("Gerente de caixa")){
+                if (funcDao.getCargo(user, senha).equals("Gerente")) {
+                    new PrincipalGerente().setVisible(true);
+                    dispose();
+                } else if (funcDao.getCargo(user, senha).equals("Gerente de caixa")) {
                     new PrincipalGerenteCaixa().setVisible(true);
-                }else
+                    dispose();
+                } else {
                     new PrincipalOperador().setVisible(true);
+                    dispose();
+                }
             } else {
                 lbMsg.setText("Atenção: Senha incorreta");
                 lbMsg.setForeground(Color.red);
@@ -140,6 +144,7 @@ public class Login extends javax.swing.JFrame {
         }
 
         new UserLogado(user, senha);
+
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -180,6 +185,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    FuncionarioDao funcDao = new FuncionarioDao();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;

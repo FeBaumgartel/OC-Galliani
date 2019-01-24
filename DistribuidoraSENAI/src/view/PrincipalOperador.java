@@ -18,7 +18,10 @@ public class PrincipalOperador extends javax.swing.JFrame {
      */
     public PrincipalOperador() {
         initComponents();
-        btFrente.setEnabled(false);
+        btFrente.setEnabled(true);
+        btRelatorios.setEnabled(false);
+        btEntidades.setEnabled(false);
+        btGraficos.setEnabled(false);
        // lbUser.setText("Usuário: "+UserLogado.toString);
     }
 
@@ -128,19 +131,19 @@ public class PrincipalOperador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_btSairActionPerformed
 
     private void btEntidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntidadesActionPerformed
-        new Entidades().setVisible(true);
+
     }//GEN-LAST:event_btEntidadesActionPerformed
 
     private void btRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelatoriosActionPerformed
-        new Relatorios().setVisible(true);
+
     }//GEN-LAST:event_btRelatoriosActionPerformed
 
     private void btGraficosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficosActionPerformed
-        new Graficos().setVisible(true);
+
     }//GEN-LAST:event_btGraficosActionPerformed
 
     /**

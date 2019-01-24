@@ -31,8 +31,6 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
         limpaCampos();
         ImageIcon image = new ImageIcon(diretorio);
         lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
-//        ImageIcon image = new ImageIcon(arquivo.getSelectedFile().getPath());
-//        lblFoto.setIcon(new ImageIcon(image.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT)));
     }
 
     /**
@@ -51,7 +49,6 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
         txNome = new javax.swing.JTextField();
         txCPF = new javax.swing.JTextField();
         txRG = new javax.swing.JTextField();
-        txDataNasc = new javax.swing.JTextField();
         txTelefone = new javax.swing.JTextField();
         txCelular = new javax.swing.JTextField();
         txEmail = new javax.swing.JTextField();
@@ -67,6 +64,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
         lbEmail = new javax.swing.JLabel();
         lbMsg = new javax.swing.JLabel();
         lbImg = new javax.swing.JLabel();
+        txDataNasc = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,6 +119,12 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
         lbImg.setMaximumSize(new java.awt.Dimension(140, 140));
         lbImg.setMinimumSize(new java.awt.Dimension(140, 140));
 
+        try {
+            txDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,22 +134,21 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lbNome)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txCelular, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txTelefone, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txDataNasc, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txRG, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbCPF, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbRG, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txNome, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txCPF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txEmail)
+                            .addComponent(txCelular)
+                            .addComponent(txTelefone)
+                            .addComponent(txRG)
+                            .addComponent(lbCPF)
+                            .addComponent(lbRG)
+                            .addComponent(txNome)
+                            .addComponent(txCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                             .addComponent(lbDataNasc)
                             .addComponent(lbTelefone)
                             .addComponent(lbCelular)
-                            .addComponent(lbEmail))
+                            .addComponent(lbEmail)
+                            .addComponent(txDataNasc))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,9 +276,10 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
                 repaint();
             }
 
-            dao.update(criarCliente());
+            
             lbMsg.setText("Cadastro realizado com sucesso");
             lbMsg.setForeground(Color.green);
+            dao.save(criarCliente());
             repaint();
         } catch (Exception e) {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
@@ -347,7 +351,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel lbTelefone;
     private javax.swing.JTextField txCPF;
     private javax.swing.JTextField txCelular;
-    private javax.swing.JTextField txDataNasc;
+    private javax.swing.JFormattedTextField txDataNasc;
     private javax.swing.JTextField txEmail;
     private javax.swing.JTextField txNome;
     private javax.swing.JTextField txRG;

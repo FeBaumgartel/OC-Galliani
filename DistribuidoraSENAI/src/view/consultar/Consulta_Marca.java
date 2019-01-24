@@ -10,6 +10,7 @@ import domain.Marca;
 import java.util.List;
 import javax.swing.table.TableModel;
 import resource.MarcaTableModel;
+import view.alterar.Alterar_Marca;
 import view.cadastrar.Cadastrar_Marca;
 
 /**
@@ -48,6 +49,11 @@ public class Consulta_Marca extends javax.swing.JFrame {
         txBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txBuscaActionPerformed(evt);
+            }
+        });
+        txBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txBuscaKeyPressed(evt);
             }
         });
 
@@ -92,6 +98,11 @@ public class Consulta_Marca extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -123,6 +134,20 @@ public class Consulta_Marca extends javax.swing.JFrame {
         dao.delete(a.getId_marca());
     }//GEN-LAST:event_btExcActionPerformed
 
+    private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            String nome = txBusca.getText();
+            atualizarTabelaFiltro(nome);
+        }
+    }//GEN-LAST:event_txBuscaKeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            Marca a = mtm.getValueAT(jTable1.getSelectedRow());
+            new Alterar_Marca(a).setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -135,6 +160,15 @@ public class Consulta_Marca extends javax.swing.JFrame {
 
     private void atualizarTabela() {
         jTable1.setModel(carregarTabela());
+    }
+    private TableModel carregarTabelaFiltro(String nome) {
+        List<Marca> lista = dao.listNome(nome);
+        mtm = new MarcaTableModel(lista);
+        return mtm;
+    }
+
+    private void atualizarTabelaFiltro(String nome) {
+        jTable1.setModel(carregarTabelaFiltro(nome));
     }
     
     MarcaDao dao;

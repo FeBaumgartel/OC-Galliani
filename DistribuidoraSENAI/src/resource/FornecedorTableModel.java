@@ -97,7 +97,7 @@ public class FornecedorTableModel extends GenericTableModel<Fornecedor> {
                 return fornecedor.getId_fornecedor();
             case 1:
                 return fornecedor.getNome();
-            case 3:
+            case 2:
                 return fornecedor.getNome_fantasia();
 
         }

@@ -132,7 +132,7 @@ public class PrincipalGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btSairActionPerformed
 
     private void btEntidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntidadesActionPerformed
-        new Entidades().setVisible(true);
+        new Cadastros().setVisible(true);
     }//GEN-LAST:event_btEntidadesActionPerformed
 
     private void btRelatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelatoriosActionPerformed
@@ -140,7 +140,7 @@ public class PrincipalGerente extends javax.swing.JFrame {
     }//GEN-LAST:event_btRelatoriosActionPerformed
 
     private void btGraficosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficosActionPerformed
-        new Graficos().setVisible(true);
+//        new Graficos().setVisible(true);
     }//GEN-LAST:event_btGraficosActionPerformed
 
     /**

@@ -126,6 +126,78 @@ public class ProdutoDao {
         }
         return produto;
     }
+    public List<Produto> listDesc(String desc) {
+        String sql1 = "SELECT * FROM produto WHERE descricao LIKE '%"+desc+"%' ORDER BY id_produto ASC";
+
+        List<Produto> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
+
+            while (res1.next()) {
+                Produto produto = new Produto();
+                Marca marca = new Marca();
+                Fornecedor fornecedor = new Fornecedor();
+                Un_medida unidade = new Un_medida();
+
+                produto.setId_produto(res1.getInt("id_produto"));
+                produto.setDescricao(res1.getString("descricao"));
+                produto.setCod_barras(res1.getString("codigo_de_barras"));
+                produto.setValor_unt(res1.getDouble("valor_unitario"));
+                produto.setDescricao(res1.getString("descricao"));
+                produto.setFoto(res1.getString("foto"));
+                int idunidade = res1.getInt("id_unidade_de_medida");
+                int idmarca = res1.getInt("id_marca");
+                int idforn = res1.getInt("id_fornecedor");
+
+                String sql2 = "SELECT * FROM marca WHERE id_marca = " + idmarca + " ORDER BY id_marca ASC";
+                PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
+                ResultSet res2 = pstmt2.executeQuery(sql2);
+
+                while (res2.next()) {
+                    marca.setId_marca(res2.getInt("id_marca"));
+                    marca.setNome(res2.getString("nome"));
+                    marca.setEndereco_eletronico(res2.getString("endereco_eletronico"));
+                }
+                produto.setMarca(marca);
+                pstmt2.close();
+
+                String sql3 = "SELECT * FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY  ASC";
+                PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
+                ResultSet res3 = pstmt3.executeQuery(sql3);
+
+                while (res2.next()) {
+                    fornecedor.setId_fornecedor(res3.getInt("id_fornecedor"));
+                    fornecedor.setNome(res3.getString("nome"));
+                    fornecedor.setNome_fantasia(res3.getString("nome_fantasia"));
+                    fornecedor.setCnpj(res3.getString("cnpj"));
+                    fornecedor.setTelefone(res3.getString("telefone"));
+                    fornecedor.setEmail(res3.getString("email"));
+                    fornecedor.setInscricao_estadual(res3.getString("inscricao_estadual"));
+                    fornecedor.setRamo_negocio(res3.getString("ramo_negocio"));
+                }
+                produto.setFornecedor(fornecedor);
+                pstmt3.close();
+
+                String sql4 = "SELECT * FROM unidade_de_medida WHERE id_unidade_de_medida = " + idunidade + " ORDER BY  ASC";
+                PreparedStatement pstmt4 = (PreparedStatement) connection.prepareStatement(sql4);
+                ResultSet res4 = pstmt4.executeQuery(sql4);
+
+                while (res4.next()) {
+                    unidade.setId_unidade(res4.getInt("id_unidade"));
+                    unidade.setNome(res4.getString("nome"));
+                }
+                produto.setUn_medida(unidade);
+                lista.add(produto);
+                pstmt4.close();
+            }
+            pstmt1.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lista;
+    }
 
     public List<Produto> list() {
         String sql1 = "SELECT * FROM produto ORDER BY id_produto ASC";
@@ -201,7 +273,7 @@ public class ProdutoDao {
     }
 
     public List<String> getMarca() {
-        String sql1 = "SELECT nome FROM marca ORDER BY nome ASC";
+        String sql1 = "SELECT * FROM marca ORDER BY id_marca ASC";
 
         List<String> lista = new ArrayList<>();
         try {
@@ -209,7 +281,9 @@ public class ProdutoDao {
             ResultSet res1 = pstmt1.executeQuery(sql1);
             while (res1.next()) {
                 String marca;
-                marca = res1.getString("nome");
+                marca = ""+res1.getInt("id_marca");
+                marca+=" | ";
+                marca += res1.getString("nome");
                 lista.add(marca);
             }
             pstmt1.close();
@@ -221,7 +295,7 @@ public class ProdutoDao {
     }
 
     public List<String> getFornecedor() {
-        String sql1 = "SELECT nome FROM fornecedor ORDER BY nome ASC";
+        String sql1 = "SELECT * FROM fornecedor ORDER BY id_fornecedor ASC";
 
         List<String> lista = new ArrayList<>();
         try {
@@ -229,7 +303,9 @@ public class ProdutoDao {
             ResultSet res1 = pstmt1.executeQuery(sql1);
             while (res1.next()) {
                 String fornecedor;
-                fornecedor = res1.getString("nome");
+                fornecedor = ""+res1.getInt("id_fornecedor");
+                fornecedor+=" | ";
+                fornecedor += res1.getString("nome");
                 lista.add(fornecedor);
             }
             pstmt1.close();
@@ -241,7 +317,7 @@ public class ProdutoDao {
     }
 
     public List<String> getUn_medida() {
-        String sql1 = "SELECT nome FROM unidade_de_medida ORDER BY nome ASC";
+        String sql1 = "SELECT * FROM unidade_de_medida ORDER BY id_unidade_de_medida ASC";
 
         List<String> lista = new ArrayList<>();
         try {
@@ -249,7 +325,9 @@ public class ProdutoDao {
             ResultSet res1 = pstmt1.executeQuery(sql1);
             while (res1.next()) {
                 String unidade;
-                unidade = res1.getString("nome");
+                unidade = ""+res1.getInt("id_unidade_de_medida");
+                unidade+=" | ";
+                unidade += res1.getString("nome");
                 lista.add(unidade);
             }
             pstmt1.close();

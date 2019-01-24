@@ -27,13 +27,10 @@ public class Alterar_Produto extends javax.swing.JFrame {
     /**
      * Creates new form Alterar_Produto
      */
-    public Alterar_Produto() {
+    public Alterar_Produto(Produto prod) {
         initComponents();
         limpaCampos();
-        ImageIcon image = new ImageIcon(diretorio);
-        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
-//        ImageIcon image = new ImageIcon(arquivo.getSelectedFile().getPath());
-//        lblFoto.setIcon(new ImageIcon(image.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT)));
+        PreencheCampos(prod);
     }
 
     /**
@@ -284,7 +281,7 @@ public class Alterar_Produto extends javax.swing.JFrame {
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
             lbMsg.setForeground(Color.red);
             repaint();
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btConfirmarActionPerformed
 
@@ -346,6 +343,16 @@ public class Alterar_Produto extends javax.swing.JFrame {
         cbFornecedor.setSelectedIndex(1);
         cbUn_medida.setSelectedIndex(1);
     }
+    private void PreencheCampos(Produto prod) {
+        txDescricao.setText(prod.getDescricao());
+        txCod_barras.setText(prod.getCod_barras());
+        txVal_unitario.setText(""+prod.getValor_unt());
+        txId.setText(""+prod.getId_produto());
+        ImageIcon image = new ImageIcon(prod.getFoto());
+        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+    }
+    
+    
     private ProdutoDao dao = new ProdutoDao();
     private Un_medidaDao unDao = new Un_medidaDao();
     private MarcaDao marcaDao = new MarcaDao();

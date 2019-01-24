@@ -10,6 +10,7 @@ import domain.Fornecedor;
 import java.util.List;
 import javax.swing.table.TableModel;
 import resource.FornecedorTableModel;
+import view.alterar.Alterar_Fornecedor;
 import view.cadastrar.Cadastrar_Fornecedor;
 
 /**
@@ -48,6 +49,11 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
         txBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txBuscaActionPerformed(evt);
+            }
+        });
+        txBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txBuscaKeyPressed(evt);
             }
         });
 
@@ -92,6 +98,11 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -123,11 +134,22 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
         dao.delete(a.getId_fornecedor());
     }//GEN-LAST:event_btExcActionPerformed
 
+    private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txBuscaKeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            Fornecedor a = ftm.getValueAT(jTable1.getSelectedRow());
+            new Alterar_Fornecedor(a).setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
-    
     private TableModel carregarTabela() {
+        System.out.println("oi");
         List<Fornecedor> lista = dao.list();
         ftm = new FornecedorTableModel(lista);
         return ftm;
@@ -136,7 +158,17 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
     private void atualizarTabela() {
         jTable1.setModel(carregarTabela());
     }
-    
+
+    private TableModel carregarTabelaFiltro(String nome) {
+        List<Fornecedor> lista = dao.listNome(nome);
+        ftm = new FornecedorTableModel(lista);
+        return ftm;
+    }
+
+    private void atualizarTabelaFiltro(String nome) {
+        jTable1.setModel(carregarTabelaFiltro(nome));
+    }
+
     FornecedorDao dao;
     private FornecedorTableModel ftm;
     // Variables declaration - do not modify//GEN-BEGIN:variables

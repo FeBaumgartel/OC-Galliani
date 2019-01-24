@@ -9,21 +9,23 @@ import view.alterar.Alterar_Funcionario;
 import view.alterar.Alterar_Marca;
 import view.alterar.Alterar_Cliente;
 import view.alterar.Alterar_Fornecedor;
+import view.alterar.Alterar_Produto;
 import view.cadastrar.Cadastrar_Fornecedor;
 import view.cadastrar.Cadastrar_Marca;
 import view.cadastrar.Cadastrar_Funcionario;
 import view.cadastrar.Cadastrar_Cliente;
+import view.cadastrar.Cadastrar_Produto;
 
 /**
  *
  * @author TnahLenovoNote01
  */
-public class Entidades extends javax.swing.JFrame {
+public class Cadastros extends javax.swing.JFrame {
 
     /**
      * Creates new form Entidades
      */
-    public Entidades() {
+    public Cadastros() {
         initComponents();
     }
 
@@ -39,14 +41,11 @@ public class Entidades extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btSair = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        btAltCli = new javax.swing.JButton();
-        btAltFunc = new javax.swing.JButton();
         btCadCli = new javax.swing.JButton();
         btCadFunc = new javax.swing.JButton();
-        btAltForn = new javax.swing.JButton();
-        btAltMarc = new javax.swing.JButton();
         btCadForn = new javax.swing.JButton();
         btCadMarc = new javax.swing.JButton();
+        btCadProduto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,20 +59,6 @@ public class Entidades extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
-        btAltCli.setText("Alterar Cliente");
-        btAltCli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAltCliActionPerformed(evt);
-            }
-        });
-
-        btAltFunc.setText("Alterar Funcionario");
-        btAltFunc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAltFuncActionPerformed(evt);
-            }
-        });
-
         btCadCli.setText("Cadastrar Cliente");
         btCadCli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,20 +70,6 @@ public class Entidades extends javax.swing.JFrame {
         btCadFunc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCadFuncActionPerformed(evt);
-            }
-        });
-
-        btAltForn.setText("Alterar Fornecedor");
-        btAltForn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAltFornActionPerformed(evt);
-            }
-        });
-
-        btAltMarc.setText("Alterar Marca");
-        btAltMarc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAltMarcActionPerformed(evt);
             }
         });
 
@@ -116,6 +87,13 @@ public class Entidades extends javax.swing.JFrame {
             }
         });
 
+        btCadProduto.setText("Cadastrar Produto");
+        btCadProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,43 +101,27 @@ public class Entidades extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btAltForn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btAltFunc, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                                .addComponent(btAltCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(btAltMarc, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(84, 84, 84)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btCadForn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btCadFunc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btCadCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btCadMarc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btCadCli, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadForn)
+                    .addComponent(btCadMarc, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btCadProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAltCli)
-                    .addComponent(btCadCli))
+                .addComponent(btCadCli)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAltFunc)
-                    .addComponent(btCadFunc))
+                .addComponent(btCadFunc)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btAltForn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAltMarc))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btCadForn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btCadMarc)))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addComponent(btCadForn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btCadMarc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btCadProduto)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -171,14 +133,6 @@ public class Entidades extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btSairActionPerformed
 
-    private void btAltCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAltCliActionPerformed
-        new Alterar_Cliente().setVisible(true);
-    }//GEN-LAST:event_btAltCliActionPerformed
-
-    private void btAltFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAltFuncActionPerformed
-        new Alterar_Funcionario().setVisible(true);
-    }//GEN-LAST:event_btAltFuncActionPerformed
-
     private void btCadCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCliActionPerformed
         new Cadastrar_Cliente().setVisible(true);
     }//GEN-LAST:event_btCadCliActionPerformed
@@ -186,14 +140,6 @@ public class Entidades extends javax.swing.JFrame {
     private void btCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadFuncActionPerformed
         new Cadastrar_Funcionario().setVisible(true);
     }//GEN-LAST:event_btCadFuncActionPerformed
-
-    private void btAltFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAltFornActionPerformed
-        new Alterar_Fornecedor().setVisible(true);
-    }//GEN-LAST:event_btAltFornActionPerformed
-
-    private void btAltMarcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAltMarcActionPerformed
-        new Alterar_Marca().setVisible(true);
-    }//GEN-LAST:event_btAltMarcActionPerformed
 
     private void btCadFornActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadFornActionPerformed
         new Cadastrar_Fornecedor().setVisible(true);
@@ -203,20 +149,21 @@ public class Entidades extends javax.swing.JFrame {
         new Cadastrar_Marca().setVisible(true);
     }//GEN-LAST:event_btCadMarcActionPerformed
 
+    private void btCadProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadProdutoActionPerformed
+        new Cadastrar_Produto().setVisible(true);
+    }//GEN-LAST:event_btCadProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAltCli;
-    private javax.swing.JButton btAltForn;
-    private javax.swing.JButton btAltFunc;
-    private javax.swing.JButton btAltMarc;
     private javax.swing.JButton btCadCli;
     private javax.swing.JButton btCadForn;
     private javax.swing.JButton btCadFunc;
     private javax.swing.JButton btCadMarc;
+    private javax.swing.JButton btCadProduto;
     private javax.swing.JButton btSair;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

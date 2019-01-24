@@ -26,11 +26,10 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
     /**
      * Creates new form Alterar_Funcionario
      */
-    public Alterar_Funcionario() {
+    public Alterar_Funcionario(Funcionario func) {
         initComponents();
         limpaCampos();
-        ImageIcon image = new ImageIcon(diretorio);
-        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+        PreecheCampos(func);
     }
 
     /**
@@ -434,6 +433,24 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
         txUsuario.setText("");
         txSenha.setText("");
     }
+    private void PreecheCampos(Funcionario func) {
+        txNome.setText(func.getNome());
+        txCPF.setText(func.getCpf());
+        txRG.setText(func.getRg());
+        txCelular.setText(func.getCelular());
+        txTelefone.setText(func.getTelefone());
+        txEmail.setText(func.getEmail());
+        txDataNasc.setText(func.getNascimento().toString());
+        txDataCont.setText(func.getContratacao().toString());
+        txSalario.setText(""+func.getSalario());
+        txUsuario.setText(func.getUsuario());
+        txSenha.setText(func.getSenha());
+        txId.setText(""+func.getId_funcionario());
+        ImageIcon image = new ImageIcon(func.getFoto());
+        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+    }
+    
+       
     FuncionarioDao dao = new FuncionarioDao();
     private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto.jpg";
     // Variables declaration - do not modify//GEN-BEGIN:variables

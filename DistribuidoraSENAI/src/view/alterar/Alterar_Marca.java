@@ -20,9 +20,10 @@ public class Alterar_Marca extends javax.swing.JFrame {
     /**
      * Creates new form Alterar_Marca
      */
-    public Alterar_Marca() {
+    public Alterar_Marca(Marca marca) {
         initComponents();
         limpaCampos();
+        PreencheCampos(marca);
     }
 
     /**
@@ -157,6 +158,11 @@ public class Alterar_Marca extends javax.swing.JFrame {
     private void limpaCampos() {
         txNome.setText("");
         txEndereco.setText("");
+    }
+    private void PreencheCampos(Marca marca) {
+        txNome.setText(marca.getNome());
+        txEndereco.setText(marca.getEndereco_eletronico());
+        txId.setText(""+marca.getId_marca());
     }
     MarcaDao dao = new MarcaDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables

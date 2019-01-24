@@ -79,7 +79,39 @@ public class FornecedorDao {
     }
 
     public List<Fornecedor> list() {
+        
         String sql1 = "SELECT * FROM fornecedor ORDER BY id_fornecedor ASC";
+
+        List<Fornecedor> lista = new ArrayList<>();
+
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
+            ResultSet res1 = pstmt1.executeQuery(sql1);
+
+                
+            while (res1.next()) {
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setId_fornecedor(res1.getInt("id_fornecedor"));
+                fornecedor.setNome(res1.getString("nome"));
+                fornecedor.setNome_fantasia(res1.getString("nome_fantasia"));
+                fornecedor.setCnpj(res1.getString("cnpj"));
+                fornecedor.setTelefone(res1.getString("telefone"));
+                fornecedor.setEmail(res1.getString("email"));
+                fornecedor.setInscricao_estadual(res1.getString("inscricao_estadual"));
+                fornecedor.setRamo_negocio(res1.getString("ramo_negocio"));
+
+                lista.add(fornecedor);
+            }
+            pstmt1.close();
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+        }
+        return lista;
+    }
+
+    public List<Fornecedor> listNome(String nome) {
+        String sql1 = "SELECT * FROM fornecedor WHERE nome LIKE '%" + nome + "%' ORDER BY id_fornecedor ASC";
 
         List<Fornecedor> lista = new ArrayList<>();
 

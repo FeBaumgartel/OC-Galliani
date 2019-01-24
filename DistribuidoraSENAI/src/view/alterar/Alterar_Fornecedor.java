@@ -22,9 +22,9 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
     /**
      * Creates new form Alterar_Fornecedor
      */
-    public Alterar_Fornecedor() {
+    public Alterar_Fornecedor(Fornecedor forn) {
         initComponents();
-        limpaCampos();
+        PreencheCampos(forn);
     }
 
     /**
@@ -251,6 +251,17 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
         txEmail.setText("");
         txInscricao.setText("");
         txRamo.setText("");
+    }
+
+    private void PreencheCampos(Fornecedor forn) {
+        txNome.setText(forn.getNome());
+        txNomeFantasia.setText(forn.getNome_fantasia());
+        txCnpj.setText(forn.getCnpj());
+        txTelefone.setText(forn.getTelefone());
+        txEmail.setText(forn.getEmail());
+        txInscricao.setText(forn.getInscricao_estadual());
+        txRamo.setText(forn.getRamo_negocio());
+        txId.setText("" + forn.getId_fornecedor());
     }
     FornecedorDao dao = new FornecedorDao();
     // Variables declaration - do not modify//GEN-BEGIN:variables

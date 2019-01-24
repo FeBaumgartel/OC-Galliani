@@ -10,6 +10,7 @@ import domain.Cliente;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
@@ -26,11 +27,12 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     /**
      * Creates new form Alterar_Cliente
      */
-    public Alterar_Cliente() {
+    public Alterar_Cliente(Cliente cli) {
         initComponents();
         limpaCampos();
-        ImageIcon image = new ImageIcon(diretorio);
-        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
+        
+        PreencheCampos(cli);
+        
     }
 
     /**
@@ -358,6 +360,18 @@ public class Alterar_Cliente extends javax.swing.JFrame {
         txTelefone.setText("");
         txEmail.setText("");
         txDataNasc.setText("");
+    }
+    private void PreencheCampos(Cliente cli) {
+        txNome.setText(cli.getNome());
+        txCPF.setText(cli.getCpf());
+        txRG.setText(cli.getRg());
+        txCelular.setText(cli.getCelular());
+        txTelefone.setText(cli.getTelefone());
+        txEmail.setText(cli.getEmail());
+        txDataNasc.setText(cli.getNascimento().toString());
+        txId.setText(""+cli.getId_cliente());
+        ImageIcon image = new ImageIcon(cli.getFoto());
+        lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
     }
     private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto.jpg";
 

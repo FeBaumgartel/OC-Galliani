@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.TableModel;
 import resource.ClienteTableModel;
+import view.alterar.Alterar_Cliente;
 import view.cadastrar.Cadastrar_Cliente;
 
 /**
@@ -24,7 +25,8 @@ public class Consulta_Cliente extends javax.swing.JFrame {
      */
     public Consulta_Cliente() {
         initComponents();
-        atualizarTabela();
+        //atualizarTabela();
+        System.out.println(dao.list());
     }
 
     /**
@@ -49,6 +51,11 @@ public class Consulta_Cliente extends javax.swing.JFrame {
         txBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txBuscaActionPerformed(evt);
+            }
+        });
+        txBusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txBuscaKeyPressed(evt);
             }
         });
 
@@ -93,6 +100,11 @@ public class Consulta_Cliente extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -124,20 +136,42 @@ public class Consulta_Cliente extends javax.swing.JFrame {
         dao.delete(a.getId_cliente());
     }//GEN-LAST:event_btExcActionPerformed
 
+    private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
+        if(evt.getKeyCode() == evt.VK_ENTER){
+            String nome = txBusca.getText();
+            atualizarTabelaFiltro(nome);
+        }
+    }//GEN-LAST:event_txBuscaKeyPressed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            Cliente a = ctm.getValueAT(jTable1.getSelectedRow());
+            new Alterar_Cliente(a).setVisible(true);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
     /**
      * @param args the command line arguments
      */
     private TableModel carregarTabela() {
-        List<Cliente> lista = dao.list();
-        ctm = new ClienteTableModel(lista);
+        ctm = new ClienteTableModel(dao.list());
         return ctm;
     }
 
     private void atualizarTabela() {
         jTable1.setModel(carregarTabela());
     }
+    private TableModel carregarTabelaFiltro(String nome) {
+        List<Cliente> lista = dao.listNome(nome);
+        ctm = new ClienteTableModel(lista);
+        return ctm;
+    }
 
-    ClienteDao dao;
+    private void atualizarTabelaFiltro(String nome) {
+        jTable1.setModel(carregarTabelaFiltro(nome));
+    }
+
+    private ClienteDao dao;
     private ClienteTableModel ctm;
 
 

@@ -138,7 +138,7 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
     }//GEN-LAST:event_btRelatoriosActionPerformed
 
     private void btGraficosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGraficosActionPerformed
-        new Graficos().setVisible(true);
+//        new Graficos().setVisible(true);
     }//GEN-LAST:event_btGraficosActionPerformed
 
     /**
