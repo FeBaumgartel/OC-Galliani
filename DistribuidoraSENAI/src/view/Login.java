@@ -6,9 +6,7 @@
 package view;
 
 import dataservices.dao.FuncionarioDao;
-import domain.Funcionario;
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,9 +20,6 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         setTitle("Login");
         initComponents();
-//        String usuario = JOptionPane.showInputDialog("Digite um usuario");
-//        String senha = JOptionPane.showInputDialog("Digite uma senha");
-//        Funcionario func = new Funcionario(usuario, senha);
     }
 
     /**
@@ -65,6 +60,18 @@ public class Login extends javax.swing.JFrame {
         jPanel1.add(btCancelar);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
+
+        txUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txUsuarioKeyPressed(evt);
+            }
+        });
+
+        txSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txSenhaKeyPressed(evt);
+            }
+        });
 
         lbSenha.setText("Senha");
 
@@ -124,7 +131,7 @@ public class Login extends javax.swing.JFrame {
             if (funcDao.verifSenha(user, senha)) {
                 if (funcDao.getCargo(user, senha).equals("Gerente")) {
                     new PrincipalGerente(funcDao.getNome(user, senha)).setVisible(true);
-                    
+
                     dispose();
                 } else if (funcDao.getCargo(user, senha).equals("Gerente de caixa")) {
                     new PrincipalGerenteCaixa(funcDao.getNome(user, senha)).setVisible(true);
@@ -144,13 +151,88 @@ public class Login extends javax.swing.JFrame {
             repaint();
         }
 
-        
 
     }//GEN-LAST:event_btConfirmarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btCancelarActionPerformed
+
+    private void txUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txUsuarioKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            String user = txUsuario.getText();
+            String senha = txSenha.getText();
+            if (user.equals("")) {
+                lbMsg.setText("Atenção: Informe seu nome de usuário");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            } else if (senha.equals("")) {
+                lbMsg.setText("Atenção: Informe sua senha");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            } else if (funcDao.verifUser(user)) {
+                if (funcDao.verifSenha(user, senha)) {
+                    if (funcDao.getCargo(user, senha).equals("Gerente")) {
+                        new PrincipalGerente(funcDao.getNome(user, senha)).setVisible(true);
+
+                        dispose();
+                    } else if (funcDao.getCargo(user, senha).equals("Gerente de caixa")) {
+                        new PrincipalGerenteCaixa(funcDao.getNome(user, senha)).setVisible(true);
+                        dispose();
+                    } else {
+                        new PrincipalOperador(funcDao.getNome(user, senha)).setVisible(true);
+                        dispose();
+                    }
+                } else {
+                    lbMsg.setText("Atenção: Senha incorreta");
+                    lbMsg.setForeground(Color.red);
+                    repaint();
+                }
+            } else {
+                lbMsg.setText("Atenção: Usuário não existente");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            }
+        }
+    }//GEN-LAST:event_txUsuarioKeyPressed
+
+    private void txSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txSenhaKeyPressed
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            String user = txUsuario.getText();
+            String senha = txSenha.getText();
+            if (user.equals("")) {
+                lbMsg.setText("Atenção: Informe seu nome de usuário");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            } else if (senha.equals("")) {
+                lbMsg.setText("Atenção: Informe sua senha");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            } else if (funcDao.verifUser(user)) {
+                if (funcDao.verifSenha(user, senha)) {
+                    if (funcDao.getCargo(user, senha).equals("Gerente")) {
+                        new PrincipalGerente(funcDao.getNome(user, senha)).setVisible(true);
+
+                        dispose();
+                    } else if (funcDao.getCargo(user, senha).equals("Gerente de caixa")) {
+                        new PrincipalGerenteCaixa(funcDao.getNome(user, senha)).setVisible(true);
+                        dispose();
+                    } else {
+                        new PrincipalOperador(funcDao.getNome(user, senha)).setVisible(true);
+                        dispose();
+                    }
+                } else {
+                    lbMsg.setText("Atenção: Senha incorreta");
+                    lbMsg.setForeground(Color.red);
+                    repaint();
+                }
+            } else {
+                lbMsg.setText("Atenção: Usuário não existente");
+                lbMsg.setForeground(Color.red);
+                repaint();
+            }
+        }
+    }//GEN-LAST:event_txSenhaKeyPressed
 
     /**
      * @param args the command line arguments

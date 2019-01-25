@@ -46,8 +46,7 @@ public class ClienteDao {
             pstmt1.setString(1, cliente.getNome());
             pstmt1.setString(2, cliente.getCpf());
             pstmt1.setString(3, cliente.getRg());
-            java.util.Date datautil1 = cliente.getNascimento();
-            java.sql.Date datasql1 = new java.sql.Date(datautil1.getTime());
+            java.sql.Date datasql1 = new java.sql.Date(cliente.getNascimento().getTime());
             pstmt1.setDate(4, datasql1);
             pstmt1.setString(5, cliente.getTelefone());
             pstmt1.setString(6, cliente.getCelular());

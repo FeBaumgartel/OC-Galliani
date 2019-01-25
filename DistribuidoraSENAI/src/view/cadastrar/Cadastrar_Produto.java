@@ -30,11 +30,8 @@ public class Cadastrar_Produto extends javax.swing.JFrame {
     public Cadastrar_Produto() {
         setTitle("Cadastrar Produto");
         initComponents();
-//        limpaCampos();
         ImageIcon image = new ImageIcon(diretorio);
         lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
-//        ImageIcon image = new ImageIcon(arquivo.getSelectedFile().getPath());
-//        lblFoto.setIcon(new ImageIcon(image.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT)));
     }
 
     /**

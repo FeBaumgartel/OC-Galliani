@@ -302,7 +302,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
      */
     private Cliente criarCliente() {
         try {
-
+            
             SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
             Date nascimento = sdf.parse(txDataNasc.getText());
             String Nome = txNome.getText();

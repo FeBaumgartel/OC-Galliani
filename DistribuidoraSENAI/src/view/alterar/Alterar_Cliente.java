@@ -31,9 +31,9 @@ public class Alterar_Cliente extends javax.swing.JFrame {
         setTitle("Alterar Cliente");
         initComponents();
         txId.setEditable(false);
-        
+
         PreencheCampos(cli);
-        
+
     }
 
     /**
@@ -302,7 +302,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
             lbMsg.setForeground(Color.green);
             repaint();
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração2");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -333,8 +333,9 @@ public class Alterar_Cliente extends javax.swing.JFrame {
 
         try {
             int id = Integer.parseInt(txId.getText());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
-            Date nascimento = sdf.parse(txDataNasc.getText());
+            SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
+            Date nascimento = in.parse(out.format(txDataNasc.getText()));
             String nome = txNome.getText();
             String cpf = txCPF.getText();
             String rg = txRG.getText();
@@ -344,7 +345,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
             String imagem = diretorio;
             return new Cliente(id, nome, cpf, rg, nascimento, telefone, celular, email, imagem);
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração1");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -352,20 +353,28 @@ public class Alterar_Cliente extends javax.swing.JFrame {
         }
         return new Cliente();
     }
+
     private void PreencheCampos(Cliente cli) {
+        System.out.println(cli.getNascimento());
+        SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy");
         txNome.setText(cli.getNome());
         txCPF.setText(cli.getCpf());
         txRG.setText(cli.getRg());
         txCelular.setText(cli.getCelular());
         txTelefone.setText(cli.getTelefone());
         txEmail.setText(cli.getEmail());
-        txDataNasc.setText(cli.getNascimento().toString());
-        txId.setText(""+cli.getId_cliente());
+        try {
+            txDataNasc.setText(out.format(in.parse(cli.getNascimento().toString())));
+        } catch (Exception e) {
+
+        }
+        txId.setText("" + cli.getId_cliente());
         ImageIcon image = new ImageIcon(cli.getFoto());
         lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
     }
     private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto.jpg";
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btCancelar;

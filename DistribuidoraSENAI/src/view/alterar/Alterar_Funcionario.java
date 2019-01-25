@@ -401,7 +401,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
      */
     private Funcionario criarFuncionario() {
         try {
-            int id=Integer.parseInt(txId.getText());
+            int id = Integer.parseInt(txId.getText());
             SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/YYYY");
             Date contratacao = sdf.parse(txDataCont.getText());
             Date nascimento = sdf.parse(txDataNasc.getText());
@@ -428,23 +428,24 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
     }
 
     private void PreecheCampos(Funcionario func) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+        System.out.println(func.getNascimento()+","+func.getContratacao());
         txNome.setText(func.getNome());
         txCPF.setText(func.getCpf());
         txRG.setText(func.getRg());
         txCelular.setText(func.getCelular());
         txTelefone.setText(func.getTelefone());
         txEmail.setText(func.getEmail());
-        txDataNasc.setText(func.getNascimento().toString());
-        txDataCont.setText(func.getContratacao().toString());
-        txSalario.setText(""+func.getSalario());
+        txDataNasc.setText(sdf.format(func.getNascimento()));
+        txDataCont.setText(sdf.format(func.getContratacao()));
+        txSalario.setText("" + func.getSalario());
         txUsuario.setText(func.getUsuario());
         txSenha.setText(func.getSenha());
-        txId.setText(""+func.getId_funcionario());
+        txId.setText("" + func.getId_funcionario());
         ImageIcon image = new ImageIcon(func.getFoto());
         lbImg.setIcon(new ImageIcon(image.getImage().getScaledInstance(lbImg.getWidth(), lbImg.getHeight(), Image.SCALE_DEFAULT)));
     }
-    
-       
+
     FuncionarioDao dao = new FuncionarioDao();
     private String diretorio = "C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\sem_foto.jpg";
     // Variables declaration - do not modify//GEN-BEGIN:variables
