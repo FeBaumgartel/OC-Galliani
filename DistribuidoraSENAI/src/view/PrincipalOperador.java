@@ -169,3 +169,4 @@ public class PrincipalOperador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbNomeUser;
     // End of variables declaration//GEN-END:variables
+}
