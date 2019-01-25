@@ -97,7 +97,7 @@ public class MarcaTableModel extends GenericTableModel<Marca> {
                 return marca.getId_marca();
             case 1:
                 return marca.getNome();
-            case 3:
+            case 2:
                 return marca.getEndereco_eletronico();
 
         }

@@ -30,7 +30,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     public Alterar_Cliente(Cliente cli) {
         setTitle("Alterar Cliente");
         initComponents();
-        limpaCampos();
+        txId.setEditable(false);
         
         PreencheCampos(cli);
         
@@ -162,15 +162,14 @@ public class Alterar_Cliente extends javax.swing.JFrame {
                                 .addComponent(lbTelefone)
                                 .addComponent(lbCelular)
                                 .addComponent(lbEmail)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(lbId)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txId)
+                                .addComponent(txId, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
                                 .addGap(91, 91, 91)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbImg, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,7 +177,8 @@ public class Alterar_Cliente extends javax.swing.JFrame {
                                 .addComponent(btAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btRemover))
-                            .addComponent(lbImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lbImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lbMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -193,9 +193,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btAlterar)
-                            .addComponent(btRemover))
-                        .addGap(247, 247, 247)
-                        .addComponent(lbMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btRemover)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbId)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -228,6 +226,8 @@ public class Alterar_Cliente extends javax.swing.JFrame {
                         .addComponent(lbEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -302,7 +302,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
             lbMsg.setForeground(Color.green);
             repaint();
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração2");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -327,7 +327,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    ClienteDao dao;
+    ClienteDao dao = new ClienteDao();
 
     private Cliente criarCliente() {
 
@@ -344,23 +344,13 @@ public class Alterar_Cliente extends javax.swing.JFrame {
             String imagem = diretorio;
             return new Cliente(id, nome, cpf, rg, nascimento, telefone, celular, email, imagem);
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração1");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
 
         }
         return new Cliente();
-    }
-
-    private void limpaCampos() {
-        txNome.setText("");
-        txCPF.setText("");
-        txRG.setText("");
-        txCelular.setText("");
-        txTelefone.setText("");
-        txEmail.setText("");
-        txDataNasc.setText("");
     }
     private void PreencheCampos(Cliente cli) {
         txNome.setText(cli.getNome());

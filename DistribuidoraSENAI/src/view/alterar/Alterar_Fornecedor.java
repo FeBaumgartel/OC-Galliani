@@ -25,6 +25,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
     public Alterar_Fornecedor(Fornecedor forn) {
         setTitle("Alterar Fornecedor");
         initComponents();
+        txId.setEditable(false);
         PreencheCampos(forn);
     }
 
@@ -214,11 +215,11 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
                 repaint();
             }
             dao.update(criarFornecedor());
-            lbMsg.setText("Cadastro realizado com sucesso");
+            lbMsg.setText("Alteração realizada com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar alteração.");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -233,25 +234,15 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
     private Fornecedor criarFornecedor() {
         int id = Integer.parseInt(txId.getText());
         String nome = txNome.getText();
-        String usuario = txInscricao.getText();
-        String senha = txRamo.getText();
-        String cpf = txNomeFantasia.getText();
-        String rg = txCnpj.getText();
+        String inscricao = txInscricao.getText();
+        String ramo = txRamo.getText();
+        String nomeFant = txNomeFantasia.getText();
+        String cnpj = txCnpj.getText();
         String telefone = txTelefone.getText();
         String email = txEmail.getText();
 
-        return new Fornecedor(id, usuario, senha, nome, cpf, rg, telefone, email);
+        return new Fornecedor(id, nome, nomeFant, cnpj, telefone, email, inscricao, ramo);
 
-    }
-
-    private void limpaCampos() {
-        txNome.setText("");
-        txNomeFantasia.setText("");
-        txCnpj.setText("");
-        txTelefone.setText("");
-        txEmail.setText("");
-        txInscricao.setText("");
-        txRamo.setText("");
     }
 
     private void PreencheCampos(Fornecedor forn) {

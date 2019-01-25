@@ -5,7 +5,6 @@
  */
 package view;
 
-import persist.UserLogado;
 
 /**
  *
@@ -16,12 +15,12 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public PrincipalGerenteCaixa() {
+    public PrincipalGerenteCaixa(String nome) {
         setTitle("Tela Principal");
         initComponents();
         btFrente.setEnabled(false);
         btEntidades.setEnabled(false);
-        //lbUser.setText("Usuário: "+UserLogado.toString());
+        lbNomeUser.setText("Usuário: "+nome);
     }
 
     /**
@@ -40,7 +39,7 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
         btGraficos = new javax.swing.JButton();
         btEntidades = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        lbUser = new javax.swing.JLabel();
+        lbNomeUser = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,14 +106,14 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(111, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(105, 105, 105))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbNomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +121,7 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(lbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lbNomeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -156,6 +155,6 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel lbUser;
+    private javax.swing.JLabel lbNomeUser;
     // End of variables declaration//GEN-END:variables
 }

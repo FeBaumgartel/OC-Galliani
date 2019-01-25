@@ -5,7 +5,6 @@
  */
 package view;
 
-import persist.UserLogado;
 
 /**
  *
@@ -16,14 +15,14 @@ public class PrincipalOperador extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public PrincipalOperador() {
+    public PrincipalOperador(String nome) {
         setTitle("Tela Principal");
         initComponents();
         btFrente.setEnabled(true);
         btRelatorios.setEnabled(false);
         btEntidades.setEnabled(false);
         btGraficos.setEnabled(false);
-       // lbUser.setText("Usuário: "+UserLogado.toString);
+        lbNomeUser.setText("Usuário: "+nome);
     }
 
     /**
@@ -42,7 +41,8 @@ public class PrincipalOperador extends javax.swing.JFrame {
         btGraficos = new javax.swing.JButton();
         btEntidades = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        lbNomeUser = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,23 +107,29 @@ public class PrincipalOperador extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\TnahLenovoNote01\\Desktop\\trabalhoEstagio\\imgs\\logo.PNG")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/logo.PNG"))); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addComponent(jLabel4)
-                .addContainerGap(122, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbNomeUser, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(122, 122, 122))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel4)
-                .addContainerGap(49, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(85, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(lbNomeUser, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel3, java.awt.BorderLayout.CENTER);
@@ -158,8 +164,8 @@ public class PrincipalOperador extends javax.swing.JFrame {
     private javax.swing.JButton btGraficos;
     private javax.swing.JButton btRelatorios;
     private javax.swing.JButton btSair;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lbNomeUser;
     // End of variables declaration//GEN-END:variables
-}

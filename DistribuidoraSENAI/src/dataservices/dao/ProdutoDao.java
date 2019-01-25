@@ -126,8 +126,9 @@ public class ProdutoDao {
         }
         return produto;
     }
+
     public List<Produto> listDesc(String desc) {
-        String sql1 = "SELECT * FROM produto WHERE descricao LIKE '%"+desc+"%' ORDER BY id_produto ASC";
+        String sql1 = "SELECT * FROM produto WHERE descricao LIKE '%" + desc + "%' ORDER BY id_produto ASC";
 
         List<Produto> lista = new ArrayList<>();
 
@@ -137,60 +138,24 @@ public class ProdutoDao {
 
             while (res1.next()) {
                 Produto produto = new Produto();
-                Marca marca = new Marca();
                 Fornecedor fornecedor = new Fornecedor();
-                Un_medida unidade = new Un_medida();
 
                 produto.setId_produto(res1.getInt("id_produto"));
                 produto.setDescricao(res1.getString("descricao"));
-                produto.setCod_barras(res1.getString("codigo_de_barras"));
                 produto.setValor_unt(res1.getDouble("valor_unitario"));
-                produto.setDescricao(res1.getString("descricao"));
-                produto.setFoto(res1.getString("foto"));
-                int idunidade = res1.getInt("id_unidade_de_medida");
-                int idmarca = res1.getInt("id_marca");
+                produto.setCategoria(res1.getString("categoria"));
                 int idforn = res1.getInt("id_fornecedor");
 
-                String sql2 = "SELECT * FROM marca WHERE id_marca = " + idmarca + " ORDER BY id_marca ASC";
+                String sql2 = "SELECT nome FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY id_fornecedor ASC";
                 PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
                 ResultSet res2 = pstmt2.executeQuery(sql2);
 
                 while (res2.next()) {
-                    marca.setId_marca(res2.getInt("id_marca"));
-                    marca.setNome(res2.getString("nome"));
-                    marca.setEndereco_eletronico(res2.getString("endereco_eletronico"));
-                }
-                produto.setMarca(marca);
-                pstmt2.close();
-
-                String sql3 = "SELECT * FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY  ASC";
-                PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
-                ResultSet res3 = pstmt3.executeQuery(sql3);
-
-                while (res2.next()) {
-                    fornecedor.setId_fornecedor(res3.getInt("id_fornecedor"));
-                    fornecedor.setNome(res3.getString("nome"));
-                    fornecedor.setNome_fantasia(res3.getString("nome_fantasia"));
-                    fornecedor.setCnpj(res3.getString("cnpj"));
-                    fornecedor.setTelefone(res3.getString("telefone"));
-                    fornecedor.setEmail(res3.getString("email"));
-                    fornecedor.setInscricao_estadual(res3.getString("inscricao_estadual"));
-                    fornecedor.setRamo_negocio(res3.getString("ramo_negocio"));
+                    fornecedor.setNome(res2.getString("nome"));
                 }
                 produto.setFornecedor(fornecedor);
-                pstmt3.close();
-
-                String sql4 = "SELECT * FROM unidade_de_medida WHERE id_unidade_de_medida = " + idunidade + " ORDER BY  ASC";
-                PreparedStatement pstmt4 = (PreparedStatement) connection.prepareStatement(sql4);
-                ResultSet res4 = pstmt4.executeQuery(sql4);
-
-                while (res4.next()) {
-                    unidade.setId_unidade(res4.getInt("id_unidade"));
-                    unidade.setNome(res4.getString("nome"));
-                }
-                produto.setUn_medida(unidade);
+                pstmt2.close();
                 lista.add(produto);
-                pstmt4.close();
             }
             pstmt1.close();
         } catch (SQLException ex) {
@@ -218,7 +183,7 @@ public class ProdutoDao {
                 produto.setDescricao(res1.getString("descricao"));
                 produto.setCod_barras(res1.getString("codigo_de_barras"));
                 produto.setValor_unt(res1.getDouble("valor_unitario"));
-                produto.setDescricao(res1.getString("descricao"));
+                produto.setCategoria(res1.getString("categoria"));
                 produto.setFoto(res1.getString("foto"));
                 int idunidade = res1.getInt("id_unidade_de_medida");
                 int idmarca = res1.getInt("id_marca");
@@ -236,11 +201,11 @@ public class ProdutoDao {
                 produto.setMarca(marca);
                 pstmt2.close();
 
-                String sql3 = "SELECT * FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY  ASC";
+                String sql3 = "SELECT * FROM fornecedor WHERE id_fornecedor = " + idforn + " ORDER BY id_fornecedor ASC";
                 PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
                 ResultSet res3 = pstmt3.executeQuery(sql3);
 
-                while (res2.next()) {
+                while (res3.next()) {
                     fornecedor.setId_fornecedor(res3.getInt("id_fornecedor"));
                     fornecedor.setNome(res3.getString("nome"));
                     fornecedor.setNome_fantasia(res3.getString("nome_fantasia"));
@@ -253,12 +218,12 @@ public class ProdutoDao {
                 produto.setFornecedor(fornecedor);
                 pstmt3.close();
 
-                String sql4 = "SELECT * FROM unidade_de_medida WHERE id_unidade_de_medida = " + idunidade + " ORDER BY  ASC";
+                String sql4 = "SELECT * FROM unidade_de_medida WHERE id_unidade_de_medida = " + idunidade + " ORDER BY id_unidade_de_medida ASC";
                 PreparedStatement pstmt4 = (PreparedStatement) connection.prepareStatement(sql4);
                 ResultSet res4 = pstmt4.executeQuery(sql4);
 
                 while (res4.next()) {
-                    unidade.setId_unidade(res4.getInt("id_unidade"));
+                    unidade.setId_unidade(res4.getInt("id_unidade_de_medida"));
                     unidade.setNome(res4.getString("nome"));
                 }
                 produto.setUn_medida(unidade);
@@ -281,8 +246,8 @@ public class ProdutoDao {
             ResultSet res1 = pstmt1.executeQuery(sql1);
             while (res1.next()) {
                 String marca;
-                marca = ""+res1.getInt("id_marca");
-                marca+=" | ";
+                marca = "" + res1.getInt("id_marca");
+                marca += " | ";
                 marca += res1.getString("nome");
                 lista.add(marca);
             }
@@ -303,8 +268,8 @@ public class ProdutoDao {
             ResultSet res1 = pstmt1.executeQuery(sql1);
             while (res1.next()) {
                 String fornecedor;
-                fornecedor = ""+res1.getInt("id_fornecedor");
-                fornecedor+=" | ";
+                fornecedor = "" + res1.getInt("id_fornecedor");
+                fornecedor += " | ";
                 fornecedor += res1.getString("nome");
                 lista.add(fornecedor);
             }
@@ -325,8 +290,8 @@ public class ProdutoDao {
             ResultSet res1 = pstmt1.executeQuery(sql1);
             while (res1.next()) {
                 String unidade;
-                unidade = ""+res1.getInt("id_unidade_de_medida");
-                unidade+=" | ";
+                unidade = "" + res1.getInt("id_unidade_de_medida");
+                unidade += " | ";
                 unidade += res1.getString("nome");
                 lista.add(unidade);
             }
@@ -342,30 +307,29 @@ public class ProdutoDao {
 
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
-            ResultSet res1 = pstmt1.executeQuery(sql1);
-            while (res1.next()) {
 
-                pstmt1.setString(1, produto.getDescricao());
-                pstmt1.setString(2, produto.getCod_barras());
-                pstmt1.setDouble(3, produto.getValor_unt());
-                pstmt1.setString(4, produto.getCategoria());
-                pstmt1.setString(5, produto.getFoto());
-                pstmt1.setInt(6, produto.getUn_medida().getId_unidade());
-                pstmt1.setInt(7, produto.getMarca().getId_marca());
-                pstmt1.setInt(8, produto.getFornecedor().getId_fornecedor());
-                pstmt1.setInt(9, produto.getId_produto());
-                pstmt1.execute();
-            }
+            pstmt1.setString(1, produto.getDescricao());
+            pstmt1.setString(2, produto.getCod_barras());
+            pstmt1.setDouble(3, produto.getValor_unt());
+            pstmt1.setString(4, produto.getCategoria());
+            pstmt1.setString(5, produto.getFoto());
+            pstmt1.setInt(6, produto.getUn_medida().getId_unidade());
+            pstmt1.setInt(7, produto.getMarca().getId_marca());
+            pstmt1.setInt(8, produto.getFornecedor().getId_fornecedor());
+            pstmt1.setInt(9, produto.getId_produto());
+            pstmt1.execute();
             pstmt1.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void delete(int id) {
-        String sql1 = "DELETE FROM produto WHERE id_produto = " + id;
+        int iddel = id;
+        String sql1 = "DELETE FROM produto WHERE id_produto = " + iddel;
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
-            pstmt1.executeQuery(sql1);
+            pstmt1.executeUpdate(sql1);
         } catch (SQLException e) {
             e.printStackTrace();
         }

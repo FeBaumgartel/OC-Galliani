@@ -94,8 +94,8 @@ public class MarcaDao {
         return lista;
     }
 
-public List<Marca> listNome(String nome) {
-        String sql1 = "SELECT * FROM marca WHERE nome LIKE '%"+nome+"%' ORDER BY id_marca ASC";
+    public List<Marca> listNome(String nome) {
+        String sql1 = "SELECT * FROM marca WHERE nome LIKE '%" + nome + "%' ORDER BY id_marca ASC";
 
         List<Marca> lista = new ArrayList<>();
 
@@ -118,6 +118,7 @@ public List<Marca> listNome(String nome) {
         }
         return lista;
     }
+
     public void update(Marca marca) {
         String sql1 = "UPDATE marca SET nome = ?, endereco_eletronico = ? WHERE id_marca = ?";
 
@@ -147,12 +148,12 @@ public List<Marca> listNome(String nome) {
                 int idProduto = res1.getInt("id_produto");
                 String sql3 = "DELETE produto FROM WHERE id_produto = " + idProduto;
                 PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
-                pstmt3.executeQuery(sql3);
+                pstmt3.executeUpdate(sql3);
                 pstmt3.close();
             }
             pstmt1.close();
             PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-            pstmt2.executeQuery(sql2);
+            pstmt2.executeUpdate(sql2);
         } catch (SQLException e) {
             e.printStackTrace();
         }

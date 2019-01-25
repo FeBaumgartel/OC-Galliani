@@ -23,7 +23,7 @@ public class Alterar_Marca extends javax.swing.JFrame {
     public Alterar_Marca(Marca marca) {
         setTitle("Alterar Marca");
         initComponents();
-        limpaCampos();
+        txId.setEditable(false);
         PreencheCampos(marca);
     }
 
@@ -133,12 +133,11 @@ public class Alterar_Marca extends javax.swing.JFrame {
                 repaint();
             }
             dao.update(criarMarca());
-            lbMsg.setText("Cadastro realizado com sucesso");
+            lbMsg.setText("Alteração realizada com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
-            limpaCampos();
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração.");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -155,10 +154,6 @@ public class Alterar_Marca extends javax.swing.JFrame {
 
         return new Marca(id, nome, endereco);
 
-    }
-    private void limpaCampos() {
-        txNome.setText("");
-        txEndereco.setText("");
     }
     private void PreencheCampos(Marca marca) {
         txNome.setText(marca.getNome());

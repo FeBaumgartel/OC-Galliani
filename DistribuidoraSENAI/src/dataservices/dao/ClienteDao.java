@@ -110,7 +110,6 @@ public class ClienteDao {
     }
 
     public List<Cliente> list() {
-        System.out.println("oi");
         String sql1 = "SELECT * FROM cliente ORDER BY id_cliente ASC";
 
         List<Cliente> lista = new ArrayList<>();
@@ -145,44 +144,28 @@ public class ClienteDao {
             }
             pstmt1.close();
         } catch (SQLException ex) {
-            System.out.println("oi");
             ex.printStackTrace();
         }
         return lista;
     }
 
     public List<Cliente> listNome(String nome) {
-        String sql1 = "SELECT * FROM cliente WHERE nome LIKE '%" + nome + "%' ORDER BY id_cliente ASC";
 
+        String sql1 = "SELECT pessoa.nome, pessoa.nascimento, cliente.id_cliente FROM cliente, pessoa WHERE pessoa.nome LIKE '%" + nome + "%' AND pessoa.id_pessoa = cliente.pessoa_id_pessoa ORDER BY id_cliente ASC";
         List<Cliente> lista = new ArrayList<>();
 
         try {
+
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             ResultSet res1 = pstmt1.executeQuery(sql1);
 
             while (res1.next()) {
                 Cliente cliente = new Cliente();
-
                 cliente.setId_cliente(res1.getInt("id_cliente"));
-                int idPess = res1.getInt("Pessoa_id_pessoa");
 
-                String sql2 = "SELECT * FROM TB_pessoa WHERE id_pessoa = " + idPess;
-                PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-                ResultSet res2 = pstmt2.executeQuery(sql2);
-
-                while (res2.next()) {
-                    cliente.setNome(res2.getString("nome"));
-                    cliente.setCpf(res2.getString("cpf"));
-                    cliente.setRg(res2.getString("rg"));
-                    cliente.setNascimento(res2.getDate("nascimento"));
-                    cliente.setTelefone(res2.getString("telefone"));
-                    cliente.setCelular(res2.getString("celular"));
-                    cliente.setEmail(res2.getString("email"));
-                    cliente.setFoto(res2.getString("foto"));
-
-                }
+                cliente.setNome(res1.getString("nome"));
+                cliente.setNascimento(res1.getDate("nascimento"));
                 lista.add(cliente);
-                pstmt2.close();
             }
             pstmt1.close();
         } catch (SQLException ex) {
@@ -228,15 +211,17 @@ public class ClienteDao {
 
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             ResultSet res1 = pstmt1.executeQuery(sql1);
+            while (res1.next()) {
 
-            int idpessoa = res1.getInt("pessoa_id_pessoa");
-            pstmt1.close();
+                int idpessoa = res1.getInt("pessoa_id_pessoa");
+                pstmt1.close();
+                String sql3 = "DELETE FROM pessoa Where id_pessoa = " + idpessoa;
+                PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
+                pstmt2.executeUpdate(sql2);
+                PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
+                pstmt3.executeUpdate(sql3);
+            }
 
-            String sql3 = "DELETE FROM pessoa Where id_pessoa = " + idpessoa;
-            PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-            pstmt2.executeQuery(sql2);
-            PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
-            pstmt3.executeQuery(sql3);
         } catch (SQLException e) {
             e.printStackTrace();
         }

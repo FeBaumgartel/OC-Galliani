@@ -79,7 +79,7 @@ public class FornecedorDao {
     }
 
     public List<Fornecedor> list() {
-        
+
         String sql1 = "SELECT * FROM fornecedor ORDER BY id_fornecedor ASC";
 
         List<Fornecedor> lista = new ArrayList<>();
@@ -88,7 +88,6 @@ public class FornecedorDao {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             ResultSet res1 = pstmt1.executeQuery(sql1);
 
-                
             while (res1.next()) {
                 Fornecedor fornecedor = new Fornecedor();
                 fornecedor.setId_fornecedor(res1.getInt("id_fornecedor"));
@@ -174,12 +173,12 @@ public class FornecedorDao {
                 int idProduto = res1.getInt("id_produto");
                 String sql3 = "DELETE produto FROM WHERE id_produto = " + idProduto;
                 PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
-                pstmt3.executeQuery(sql3);
+                pstmt3.executeUpdate(sql3);
                 pstmt3.close();
             }
             pstmt1.close();
             PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-            pstmt2.executeQuery(sql2);
+            pstmt2.executeUpdate(sql2);
         } catch (SQLException e) {
             e.printStackTrace();
         }

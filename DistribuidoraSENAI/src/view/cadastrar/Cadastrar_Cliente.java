@@ -314,7 +314,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
             String imagem = diretorio;
             return new Cliente(Nome, cpf, rg, nascimento, telefone, celular, email, imagem);
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());

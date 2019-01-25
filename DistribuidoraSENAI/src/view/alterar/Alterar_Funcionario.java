@@ -29,7 +29,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
     public Alterar_Funcionario(Funcionario func) {
         setTitle("Alterar Funcionario");
         initComponents();
-        limpaCampos();
+        txId.setEditable(false);
         PreecheCampos(func);
     }
 
@@ -379,6 +379,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
             lbMsg.setForeground(Color.green);
             repaint();
         } catch (Exception e) {
+            System.out.println(e);
             lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
             lbMsg.setForeground(Color.red);
             repaint();
@@ -418,7 +419,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
 
             return new Funcionario(id, contratacao, salario, cargo, usuario, senha, nome, cpf, rg, nascimento, telefone, celular, email, imagem);
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração");
             lbMsg.setForeground(Color.red);
             repaint();
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -426,20 +427,6 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
         return new Funcionario();
     }
 
-    private void limpaCampos() {
-        txNome.setText("");
-        txCPF.setText("");
-        txRG.setText("");
-        txCelular.setText("");
-        txTelefone.setText("");
-        txEmail.setText("");
-        txDataNasc.setText("");
-        txDataCont.setText("");
-        txSalario.setText("");
-        cbCargo.setSelectedItem("");
-        txUsuario.setText("");
-        txSenha.setText("");
-    }
     private void PreecheCampos(Funcionario func) {
         txNome.setText(func.getNome());
         txCPF.setText(func.getCpf());

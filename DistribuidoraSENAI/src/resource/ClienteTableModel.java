@@ -97,7 +97,7 @@ public class ClienteTableModel extends GenericTableModel<Cliente> {
                 return cliente.getId_cliente();
             case 1:
                 return cliente.getNome();
-            case 3:
+            case 2:
                 return cliente.getNascimento();
 
         }

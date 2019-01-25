@@ -30,7 +30,7 @@ public class Alterar_Produto extends javax.swing.JFrame {
     public Alterar_Produto(Produto prod) {
         setTitle("Alterar Produto");
         initComponents();
-        limpaCampos();
+        txId.setEditable(false);
         PreencheCampos(prod);
     }
 
@@ -274,11 +274,11 @@ public class Alterar_Produto extends javax.swing.JFrame {
                 repaint();
             }
             dao.update(criarProduto());
-            lbMsg.setText("Cadastro realizado com sucesso");
+            lbMsg.setText("Alteração realizada com sucesso");
             lbMsg.setForeground(Color.green);
             repaint();
         } catch (Exception e) {
-            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar o cadastro.");
+            lbMsg.setText("Atenção: Ocorreu algum problema ao tentar realizar a alteração.");
             lbMsg.setForeground(Color.red);
             repaint();
             System.out.println(e.getMessage());
@@ -332,16 +332,6 @@ public class Alterar_Produto extends javax.swing.JFrame {
         int idun_medida = Integer.parseInt(un_medida.substring(0, un_medida.indexOf(" ")));
 
         return new Produto(id, descricao, cod_barras, valor_unt, categoria, imagem, unDao.getById(idun_medida), marcaDao.getById(idmarca), fornDao.getById(idfornecedor));
-    }
-
-    private void limpaCampos() {
-        txDescricao.setText("");
-        txCod_barras.setText("");
-        txVal_unitario.setText("");
-        cbCategoria.setSelectedIndex(1);
-        cbMarca.setSelectedIndex(1);
-        cbFornecedor.setSelectedIndex(1);
-        cbUn_medida.setSelectedIndex(1);
     }
     private void PreencheCampos(Produto prod) {
         txDescricao.setText(prod.getDescricao());

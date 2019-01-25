@@ -97,13 +97,11 @@ public class ProdutoTableModel extends GenericTableModel<Produto> {
                 return produto.getId_produto();
             case 1:
                 return produto.getDescricao();
-            case 3:
+            case 2:
                 return produto.getValor_unt();
-            case 4:
+            case 3:
                 return produto.getCategoria();
-            case 5:
-                return produto.getMarca().getNome();
-            case 6:
+            case 4:
                 return produto.getFornecedor().getNome();
 
         }

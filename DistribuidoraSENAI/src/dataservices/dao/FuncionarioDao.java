@@ -63,16 +63,16 @@ public class FuncionarioDao {
             ResultSet res3 = pstmt3.executeQuery(sql3);
             while (res3.next()) {
                 id = res3.getInt("MAX(id_pessoa)");
+                java.util.Date datautil2 = funcionario.getContratacao();
+                java.sql.Date datasql2 = new java.sql.Date(datautil2.getTime());
+                pstmt2.setDate(1, datasql2);
+                pstmt2.setDouble(2, funcionario.getSalario());
+                pstmt2.setString(3, funcionario.getCargo());
+                pstmt2.setString(4, funcionario.getUsuario());
+                pstmt2.setString(5, funcionario.getSenha());
+                pstmt2.setInt(6, id);
+                pstmt2.execute();
             }
-            java.util.Date datautil2 = funcionario.getContratacao();
-            java.sql.Date datasql2 = new java.sql.Date(datautil2.getTime());
-            pstmt1.setDate(1, datasql2);
-            pstmt2.setDouble(2, funcionario.getSalario());
-            pstmt2.setString(3, funcionario.getCargo());
-            pstmt2.setString(4, funcionario.getUsuario());
-            pstmt2.setString(5, funcionario.getSenha());
-            pstmt2.setInt(6, id);
-            pstmt2.execute();
 
             pstmt2.close();
             pstmt3.close();
@@ -183,6 +183,21 @@ public class FuncionarioDao {
         }
         return cargo;
     }
+    public String getNome(String usuario, String senha) {
+        String sql = "SELECT pessoa.nome FROM pessoa,funcionario WHERE funcionario.pessoa_id_pessoa = pessoa.id_pessoa AND funcionario.usuario = '" + usuario + "' AND funcionario.senha = '" + senha + "'";
+        String nome = "";
+        try {
+            PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql);
+            ResultSet res1 = pstmt1.executeQuery(sql);
+            if (res1.next()) {
+                nome = res1.getString("nome");
+            }
+            pstmt1.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return nome;
+    }
 
     public List<Funcionario> list() {
         String sql1 = "SELECT * FROM funcionario ORDER BY id_funcionario ASC";
@@ -204,7 +219,7 @@ public class FuncionarioDao {
                 funcionario.setId_funcionario(res1.getInt("id_funcionario"));
                 int idPess = res1.getInt("Pessoa_id_pessoa");
 
-                String sql2 = "SELECT * FROM TB_pessoa WHERE id_pessoa = " + idPess;
+                String sql2 = "SELECT * FROM pessoa WHERE id_pessoa = " + idPess;
                 PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
                 ResultSet res2 = pstmt2.executeQuery(sql2);
 
@@ -230,42 +245,24 @@ public class FuncionarioDao {
     }
 
     public List<Funcionario> listNome(String nome) {
-        String sql1 = "SELECT * FROM funcionario WHERE nome LIKE '%" + nome + "%' ORDER BY id_funcionario ASC";
-
+        String sql1 = "SELECT pessoa.nome, pessoa.nascimento, funcionario.salario, funcionario.data_contratacao, funcionario.cargo, funcionario.id_funcionario FROM funcionario, pessoa WHERE pessoa.nome LIKE '%" + nome + "%' AND pessoa.id_pessoa = funcionario.pessoa_id_pessoa ORDER BY id_funcionario ASC";
         List<Funcionario> lista = new ArrayList<>();
 
         try {
+
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             ResultSet res1 = pstmt1.executeQuery(sql1);
 
             while (res1.next()) {
                 Funcionario funcionario = new Funcionario();
-
-                funcionario.setContratacao(res1.getDate("data_contratacao"));
+                funcionario.setId_funcionario(res1.getInt("id_funcionario"));
                 funcionario.setSalario(res1.getDouble("salario"));
                 funcionario.setCargo(res1.getString("cargo"));
-                funcionario.setUsuario(res1.getString("usuario"));
-                funcionario.setSenha(res1.getString("senha"));
-                funcionario.setId_funcionario(res1.getInt("id_funcionario"));
-                int idPess = res1.getInt("Pessoa_id_pessoa");
+                funcionario.setContratacao(res1.getDate("data_contratacao"));
 
-                String sql2 = "SELECT * FROM TB_pessoa WHERE id_pessoa = " + idPess;
-                PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-                ResultSet res2 = pstmt2.executeQuery(sql2);
-
-                while (res2.next()) {
-                    funcionario.setNome(res2.getString("nome"));
-                    funcionario.setCpf(res2.getString("cpf"));
-                    funcionario.setRg(res2.getString("rg"));
-                    funcionario.setNascimento(res2.getDate("nascimento"));
-                    funcionario.setTelefone(res2.getString("telefone"));
-                    funcionario.setCelular(res2.getString("celular"));
-                    funcionario.setEmail(res2.getString("email"));
-                    funcionario.setFoto(res2.getString("foto"));
-
-                }
+                funcionario.setNome(res1.getString("nome"));
+                funcionario.setNascimento(res1.getDate("nascimento"));
                 lista.add(funcionario);
-                pstmt2.close();
             }
             pstmt1.close();
         } catch (SQLException ex) {
@@ -275,22 +272,25 @@ public class FuncionarioDao {
     }
 
     public void update(Funcionario funcionario) {
-        String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = , foto = ? WHERE id_pessoa = ?";
-        String sql2 = "UPDATE tb_funcionario SET (data_contratacao=?, salario=?, cargo=?, usuario=?, senha-? WHERE id_funcionario = ?";
+        String sql1 = "UPDATE pessoa SET nome = ?, cpf = ?, rg = ?, nascimento = ?, telefone = ?, celular = ?, email = ?, foto = ? WHERE id_pessoa = ?";
+        String sql2 = "UPDATE funcionario SET data_contratacao=?, salario=?, cargo=?, usuario=?, senha=? WHERE id_funcionario = ?";
 
         try {
             PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-            pstmt2.setDate(1, (java.sql.Date) funcionario.getContratacao());
+
+            java.util.Date datautil2 = funcionario.getContratacao();
+            java.sql.Date datasql2 = new java.sql.Date(datautil2.getTime());
+            pstmt2.setDate(1, datasql2);
             pstmt2.setDouble(2, funcionario.getSalario());
             pstmt2.setString(3, funcionario.getCargo());
             pstmt2.setString(4, funcionario.getUsuario());
             pstmt2.setString(5, funcionario.getSenha());
-            pstmt2.setInt(5, funcionario.getId_funcionario());
+            pstmt2.setInt(6, funcionario.getId_funcionario());
             pstmt2.execute();
 
             pstmt2.close();
 
-            String sql3 = "SELECT Pessoa_id_pessoa FROM funcionario";
+            String sql3 = "SELECT Pessoa_id_pessoa FROM funcionario WHERE id_funcionario = " + funcionario.getId_funcionario();
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
             PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
             ResultSet res3 = pstmt3.executeQuery(sql3);
@@ -300,7 +300,9 @@ public class FuncionarioDao {
                 pstmt1.setString(1, funcionario.getNome());
                 pstmt1.setString(2, funcionario.getCpf());
                 pstmt1.setString(3, funcionario.getRg());
-                pstmt1.setDate(4, (java.sql.Date) funcionario.getNascimento());
+                java.util.Date datautil1 = funcionario.getNascimento();
+                java.sql.Date datasql1 = new java.sql.Date(datautil1.getTime());
+                pstmt1.setDate(4, datasql1);
                 pstmt1.setString(5, funcionario.getTelefone());
                 pstmt1.setString(6, funcionario.getCelular());
                 pstmt1.setString(7, funcionario.getEmail());
@@ -318,8 +320,8 @@ public class FuncionarioDao {
     }
 
     public void delete(int id) {
-        String sql1 = "SELECT id_pessoa FROM funcionario WHERE id_funcionario = '" + id + "'";
-        String sql2 = "DELETE FROM funcionario WHERE id_funcionario = '" + id + "'";
+        String sql1 = "SELECT id_pessoa FROM funcionario WHERE id_funcionario = " + id;
+        String sql2 = "DELETE FROM funcionario WHERE id_funcionario = " + id;
         try {
 
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
@@ -330,9 +332,9 @@ public class FuncionarioDao {
 
             String sql3 = "DELETE FROM pessoa Where id_pessoa = '" + idpessoa + "'";
             PreparedStatement pstmt2 = (PreparedStatement) connection.prepareStatement(sql2);
-            pstmt2.executeQuery(sql2);
+            pstmt2.executeUpdate(sql2);
             PreparedStatement pstmt3 = (PreparedStatement) connection.prepareStatement(sql3);
-            pstmt3.executeQuery(sql3);
+            pstmt3.executeUpdate(sql3);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,6 @@ import dataservices.dao.FuncionarioDao;
 import domain.Funcionario;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import persist.UserLogado;
 
 /**
  *
@@ -124,13 +123,14 @@ public class Login extends javax.swing.JFrame {
         } else if (funcDao.verifUser(user)) {
             if (funcDao.verifSenha(user, senha)) {
                 if (funcDao.getCargo(user, senha).equals("Gerente")) {
-                    new PrincipalGerente().setVisible(true);
+                    new PrincipalGerente(funcDao.getNome(user, senha)).setVisible(true);
+                    
                     dispose();
                 } else if (funcDao.getCargo(user, senha).equals("Gerente de caixa")) {
-                    new PrincipalGerenteCaixa().setVisible(true);
+                    new PrincipalGerenteCaixa(funcDao.getNome(user, senha)).setVisible(true);
                     dispose();
                 } else {
-                    new PrincipalOperador().setVisible(true);
+                    new PrincipalOperador(funcDao.getNome(user, senha)).setVisible(true);
                     dispose();
                 }
             } else {
@@ -144,7 +144,7 @@ public class Login extends javax.swing.JFrame {
             repaint();
         }
 
-        new UserLogado(user, senha);
+        
 
     }//GEN-LAST:event_btConfirmarActionPerformed
 

@@ -147,7 +147,10 @@ public class Consulta_Fornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btExcActionPerformed
 
     private void txBuscaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txBuscaKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            String nome = txBusca.getText();
+            atualizarTabelaFiltro(nome);
+        }
     }//GEN-LAST:event_txBuscaKeyPressed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
