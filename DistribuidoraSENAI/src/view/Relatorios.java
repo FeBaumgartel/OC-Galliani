@@ -21,6 +21,7 @@ public class Relatorios extends javax.swing.JFrame {
      * Creates new form Relatorios
      */
     public Relatorios() {
+        setTitle("Relatórios");
         initComponents();
     }
 

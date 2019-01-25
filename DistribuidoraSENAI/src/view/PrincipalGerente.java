@@ -17,6 +17,7 @@ public class PrincipalGerente extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public PrincipalGerente() {
+        setTitle("Tela Principal");
         initComponents();
         btFrente.setEnabled(false);
        // lbUser.setText("Usuário: "+UserLogado.toString);

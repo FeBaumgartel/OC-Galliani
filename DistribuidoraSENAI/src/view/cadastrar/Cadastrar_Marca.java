@@ -21,6 +21,7 @@ public class Cadastrar_Marca extends javax.swing.JFrame {
      * Creates new form Cadastrar_Marca
      */
     public Cadastrar_Marca() {
+        setTitle("Cadastrar Marca");
         initComponents();
         limpaCampos();
     }

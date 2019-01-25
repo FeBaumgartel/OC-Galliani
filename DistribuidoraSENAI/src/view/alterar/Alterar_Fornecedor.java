@@ -23,6 +23,7 @@ public class Alterar_Fornecedor extends javax.swing.JFrame {
      * Creates new form Alterar_Fornecedor
      */
     public Alterar_Fornecedor(Fornecedor forn) {
+        setTitle("Alterar Fornecedor");
         initComponents();
         PreencheCampos(forn);
     }

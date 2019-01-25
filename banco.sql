@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `distribuidorasenai`.`Produto` (
   `codigo_de_barras` VARCHAR(45) NOT NULL,
   `valor_unitario` DECIMAL(6,2) NOT NULL,
   `categoria` VARCHAR(45) NOT NULL,
+  `foto` VARCHAR(200) NOT NULL,
   `id_Marca` INT UNSIGNED NOT NULL,
   `id_Fornecedor` INT UNSIGNED NOT NULL,
   `id_Unidade_de_Medida` INT UNSIGNED NOT NULL,
@@ -88,3 +89,12 @@ CREATE TABLE IF NOT EXISTS `distribuidorasenai`.`Produto` (
   CONSTRAINT `fk_Produto_Unidade_de_Medida1`
     FOREIGN KEY (`id_Unidade_de_Medida`)
     REFERENCES `distribuidorasenai`.`Unidade_de_Medida` (`id_Unidade_de_Medida`));
+
+	INSERT INTO pessoa(nome, cpf, rg, nascimento, telefone, celular, email, foto) VALUES ('adm','123','123','1212/12/12','123','123','adm','asdf123');
+    INSERT INTO funcionario(data_contratacao, salario, cargo, usuario, senha, Pessoa_id_pessoa) VALUES ('1212/12/12',12.12,'Gerente','adm','adm',1);
+	
+	INSERT INTO unidade_de_medida(nome) VALUES ('kg');
+	INSERT INTO unidade_de_medida(nome) VALUES ('g');
+	INSERT INTO unidade_de_medida(nome) VALUES ('t');
+	INSERT INTO unidade_de_medida(nome) VALUES ('l');
+	INSERT INTO unidade_de_medida(nome) VALUES ('ml');

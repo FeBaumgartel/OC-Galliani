@@ -70,25 +70,23 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="txDataCont" pref="150" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txEmail" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="lbDataNasc" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbDataCont" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbCargo" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txRG" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbCPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbRG" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txCPF" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="cbCargo" max="32767" attributes="0"/>
-                                  <Component id="lbSalario" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txSalario" pref="150" max="32767" attributes="0"/>
-                                  <Component id="lbNome" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txNome" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="lbId" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txId" alignment="0" pref="150" max="32767" attributes="0"/>
-                                  <Component id="txDataNasc" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txEmail" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="lbDataNasc" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbDataCont" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbCargo" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txRG" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbCPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbRG" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txCPF" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="cbCargo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbSalario" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txSalario" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="lbNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txNome" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="lbId" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txId" alignment="0" pref="150" max="32767" attributes="0"/>
+                              <Component id="txDataNasc" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace pref="78" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -192,7 +190,7 @@
                           <Component id="txEmail" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="88" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="lbMsg" min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
           </Group>

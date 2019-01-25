@@ -26,6 +26,7 @@ public class Cadastros extends javax.swing.JFrame {
      * Creates new form Entidades
      */
     public Cadastros() {
+        setTitle("Cadastros");
         initComponents();
     }
 
@@ -156,7 +157,6 @@ public class Cadastros extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadCli;

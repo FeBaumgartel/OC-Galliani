@@ -21,6 +21,7 @@ public class Alterar_Marca extends javax.swing.JFrame {
      * Creates new form Alterar_Marca
      */
     public Alterar_Marca(Marca marca) {
+        setTitle("Alterar Marca");
         initComponents();
         limpaCampos();
         PreencheCampos(marca);

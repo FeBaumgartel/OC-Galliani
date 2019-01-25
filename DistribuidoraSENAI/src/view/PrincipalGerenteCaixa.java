@@ -17,6 +17,7 @@ public class PrincipalGerenteCaixa extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public PrincipalGerenteCaixa() {
+        setTitle("Tela Principal");
         initComponents();
         btFrente.setEnabled(false);
         btEntidades.setEnabled(false);

@@ -21,6 +21,7 @@ public class Cadastrar_Fornecedor extends javax.swing.JFrame {
      * Creates new form Cadastrar_Fornecedor
      */
     public Cadastrar_Fornecedor() {
+        setTitle("Cadastrar Fornecedor");
         initComponents();
         limpaCampos();
     }

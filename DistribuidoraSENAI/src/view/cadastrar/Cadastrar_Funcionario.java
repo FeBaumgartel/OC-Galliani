@@ -27,6 +27,7 @@ public class Cadastrar_Funcionario extends javax.swing.JFrame {
      * Creates new form Cadastrar_Funcionario
      */
     public Cadastrar_Funcionario() {
+        setTitle("Cadastrar Funcionario");
         initComponents();
         limpaCampos();
         ImageIcon image = new ImageIcon(diretorio);

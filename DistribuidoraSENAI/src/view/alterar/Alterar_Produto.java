@@ -28,6 +28,7 @@ public class Alterar_Produto extends javax.swing.JFrame {
      * Creates new form Alterar_Produto
      */
     public Alterar_Produto(Produto prod) {
+        setTitle("Alterar Produto");
         initComponents();
         limpaCampos();
         PreencheCampos(prod);

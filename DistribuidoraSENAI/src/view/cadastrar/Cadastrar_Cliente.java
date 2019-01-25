@@ -27,6 +27,7 @@ public class Cadastrar_Cliente extends javax.swing.JFrame {
      * Creates new form Cadastrar_Cliente
      */
     public Cadastrar_Cliente() {
+        setTitle("Cadastrar Cliente");
         initComponents();
         limpaCampos();
         ImageIcon image = new ImageIcon(diretorio);

@@ -28,6 +28,7 @@ public class Alterar_Cliente extends javax.swing.JFrame {
      * Creates new form Alterar_Cliente
      */
     public Alterar_Cliente(Cliente cli) {
+        setTitle("Alterar Cliente");
         initComponents();
         limpaCampos();
         

@@ -17,6 +17,7 @@ public class PrincipalOperador extends javax.swing.JFrame {
      * Creates new form Principal
      */
     public PrincipalOperador() {
+        setTitle("Tela Principal");
         initComponents();
         btFrente.setEnabled(true);
         btRelatorios.setEnabled(false);

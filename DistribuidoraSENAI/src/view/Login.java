@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
+        setTitle("Login");
         initComponents();
 //        String usuario = JOptionPane.showInputDialog("Digite um usuario");
 //        String senha = JOptionPane.showInputDialog("Digite uma senha");

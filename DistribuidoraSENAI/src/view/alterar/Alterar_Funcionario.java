@@ -27,6 +27,7 @@ public class Alterar_Funcionario extends javax.swing.JFrame {
      * Creates new form Alterar_Funcionario
      */
     public Alterar_Funcionario(Funcionario func) {
+        setTitle("Alterar Funcionario");
         initComponents();
         limpaCampos();
         PreecheCampos(func);

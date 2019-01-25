@@ -33,7 +33,7 @@ public class ProdutoDao {
     }
 
     public void save(Produto produto) {
-        String sql1 = "INSERT INTO produto(descricao, codigo_barras, valor_unitario, categoria, foto, unidade_de_media, id_Marca, id_Fornecedor) VALUES (?,?,?,?,?,?,?,?)";
+        String sql1 = "INSERT INTO produto(descricao, codigo_de_barras, valor_unitario, categoria, foto, id_unidade_de_medida, id_Marca, id_Fornecedor) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
 
@@ -338,7 +338,7 @@ public class ProdutoDao {
     }
 
     public void update(Produto produto) {
-        String sql1 = "UPDATE produto SET descricao = ?, codigo_de_barras = ?, valor_unitario = ?, categoria = ?, foto = ?, unidade_de_medida = ?, id_marca = ?, id_fornecedor = ? WHERE id_produto = ?";
+        String sql1 = "UPDATE produto SET descricao = ?, codigo_de_barras = ?, valor_unitario = ?, categoria = ?, foto = ?, id_unidade_de_medida = ?, id_marca = ?, id_fornecedor = ? WHERE id_produto = ?";
 
         try {
             PreparedStatement pstmt1 = (PreparedStatement) connection.prepareStatement(sql1);
